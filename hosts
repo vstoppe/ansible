@@ -1,0 +1,37 @@
+---
+all:
+  hosts:
+    default:
+      ansible_ssh_host: 127.0.0.1
+      ansible_ssh_port: 2222
+      ansible_ssh_user: vagrant
+      become: true
+      private-key: ~/.vagrant.d/insecure_private_key
+    myhostname:
+      ansible_ssh_host: 127.0.0.1
+      ansible_ssh_port: 2222
+      ansible_ssh_user: root
+      private-key: ~/.vagrant.d/insecure_private_key
+      hostname: default
+    indy:
+      ansible_host: 192.168.1.49
+      ansible_ssh_user: root
+      hostname: indy2
+    macbook:
+      absible_ssh_user: vst
+      become: true
+  children:
+    docker_hosts:
+      hosts:
+        indy:
+        default:
+        myhostname:
+    arch_admin_workstations:
+      hosts:
+        default:
+        indy:
+    admins:
+      hosts:
+        indy:
+        macbook:
+        default:

@@ -1,0 +1,28 @@
+---
+
+- name: ZSH setup for root
+  hosts: zsh_host
+  become: true
+
+  tasks:
+
+  - name: Ensure zsh packages
+    package:
+      name: [ zsh, zsh-theme-powerlevel9k ]
+      state: present
+
+  - name: Clone zsh repo for root user
+    git:
+      repo: 'https://github.com/vstoppe/zsh.git'
+      dest: /root/.zsh
+      update: false
+
+  - name: Run zsh setup.sh
+    command:
+      cmd: /root/.zsh/setup.sh
+      creates: /root/.oh-my-zsh
+
+  ### maybe needed for neovim
+  #- name: Ensure pip module for powerline statusbar
+  #  pip:
+  #    name: powerline-status

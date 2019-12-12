@@ -1,0 +1,46 @@
+---
+
+- name: Setup vim for root user
+  hosts: vim_host
+  become: true
+
+  tasks:
+
+  - name: Ensure neovim packages
+    package:
+      name: [ neovim, psutils, socat, python-pip  ]
+      state: present
+
+  - name: Clone vim repo for root user
+    git:
+      repo: 'https://github.com/vstoppe/vim.git'
+      dest: /root/.vim
+      update: false
+
+  - name: Ensure directories for neovim
+    file:
+      path: "{{ item }}"
+      state: directory
+      recurse: yes
+    with_items:
+      - /root/.config/nvim
+      - /root/.local/share/nvim/site/autoload
+
+  - name: Ensure active vimrc link
+    file:
+      dest: /root/.vimrc
+      src: /root/.vim/vimrc
+      state: link
+      force: yes
+
+  - name: Ensure active nvimrc link
+    file:
+      dest: /root/.config/nvim/init.vim
+      src: /root/.vim/vimrc
+      state: link
+      force: yes
+
+  - name: get vimplug
+    get_url:
+      url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      dest: /root/.local/share/nvim/site/autoload/plug.vim

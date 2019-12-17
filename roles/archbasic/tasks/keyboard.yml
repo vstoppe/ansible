@@ -1,0 +1,7 @@
+---
+
+- name: Swap caps lock and ESC
+  lineinfile:
+    path: /home/vst/.profile
+    create: yes
+    line: '/usr/bin/setxkbmap -option "caps:swapescape"'

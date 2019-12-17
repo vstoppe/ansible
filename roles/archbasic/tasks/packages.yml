@@ -1,0 +1,37 @@
+---
+
+- name: Install basic utilities and system tools
+  package: 
+    name={{item}} 
+    state=latest
+  with_items:
+    - at 
+    - btrfs-progs 
+    - diffutils 
+    - dnsutils 
+    - exfat-utils 
+    - gdisk 
+    - lsof 
+    - nfs-utils 
+    - nmap 
+    - npm 
+    - ntfs-3g 
+    - powerline 
+    - rsync 
+    - sshfs 
+    - tmux 
+    - unison 
+    - unzip 
+    - vim 
+    - wget
+
+- name: install amd64 packages
+  package:
+    name={{item}}
+  with_items:
+    - linux
+    - linux-lts
+    - linux-headers 
+    - linux-lts-headers
+  when: ansible_facts['ansible_architecture'] == "amd64"
+

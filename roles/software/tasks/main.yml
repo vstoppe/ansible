@@ -1,0 +1,6 @@
+---
+
+- include: admin.yml
+- include: internet.yml
+- include: multimedia.yml
+- include: office.yml

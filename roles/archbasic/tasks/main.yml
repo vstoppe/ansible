@@ -1,0 +1,10 @@
+---
+
+- include: settings.yml
+- include: acpi.yml
+- include: bluetooth.yml
+- include: network-manager.yml
+- include: packages.yml
+- include: keyboard.yml
+  when: custom_keyboard == true
+

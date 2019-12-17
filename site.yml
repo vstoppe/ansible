@@ -1,14 +1,8 @@
 ---
-### site.yml
-#- import_playbook: dfbnet_common.yml
-#- import_playbook: dfbnet_percona-server.yml
-#- import_playbook: dfbnet_web-server.yml
-#- import_playbook: dfbnet_zabbix-server.yml
-#- import_playbook: dfbnet_zabbix-frontend.yml
 #- import_playbook: encrypted_arch_install.yml
 #- import_playbook: arch_workstation.yml
 - import_playbook: playbooks/setup-docker.yml
 - import_playbook: playbooks/setup-vim.yml
 - import_playbook: playbooks/setup-zsh.yml
-#- import_playbook: arch_admin_workstation.yml
+- import_playbook: admin_workstation.yml
 

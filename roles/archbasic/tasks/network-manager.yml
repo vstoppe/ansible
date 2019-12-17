@@ -1,0 +1,7 @@
+- name: Enable Network Manger
+  systemd:
+    name: NetworkManager
+    state: started
+    enabled: true
+  when: 
+    acpi == true

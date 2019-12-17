@@ -1,0 +1,39 @@
+
+- name: Install plasma packages
+  package:
+    name={{item}}
+    state=latest
+  with_items:
+    - dolphin 
+    - dolphin-plugins 
+    - kate 
+    #- kde-l10n-de 
+    - ksshaskpass 
+    - kdegraphics-thumbnailers 
+    - kdialog 
+    - kontact 
+    - kscreen 
+    - libkscreen 
+    - okular 
+    - plasma-desktop 
+    - plasma-nm
+    - print-manager 
+    - sddm 
+    - sddm-kcm 
+    - spectacle 
+    #- plasma-wayland-session 
+
+
+- name: Install bluedevil
+  package:
+    name=bluedevil
+    state=latest
+  when:
+    bluetooth=true
+
+
+- name: Setting .xinitrc
+  lineinfile:
+    path: /home/vst/.xinitrc
+    create: yes
+    line: 'exec startkde'

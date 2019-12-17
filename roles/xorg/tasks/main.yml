@@ -1,0 +1,18 @@
+---
+
+#- hosts: xorg
+
+- name: Install xorg-packages
+  package:
+    name={{item}}
+    state=present
+  with_items:
+    - xorg-server
+    - xorg-xinit
+    - xf86-video-intel
+
+- name: Install virutalbox-guest-utils
+  package:
+    name=virtualbox-guest-utils
+    state=latest
+  when: ansible_virtualization_type == "virtualbox"

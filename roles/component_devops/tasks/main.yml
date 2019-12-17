@@ -1,0 +1,23 @@
+---
+
+- name: Install development packages
+  package:
+    name={{item}}
+    state=present
+  with_items:
+    - git
+    - python-lxml
+    - python-neovim
+    - python-pip
+    - subversion
+    - vim
+    - neovim
+
+- name: Install devop packages
+  package:
+    name={{item}}
+    state=present
+  with_items:
+    - ansible
+    - ansible-lint
+    - vagrant

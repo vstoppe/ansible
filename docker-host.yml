@@ -1,0 +1,36 @@
+---
+
+- hosts: default
+
+- name: base setup
+  hosts:  "{{ hostname }}"
+  user: root
+  become: true
+
+  tasks:
+
+  - name: Include setup-docker.yml
+    include: playbooks/setup-docker.yml
+    #include: playbooks/setup-vim.yml
+    #include: playbooks/setup-zsh.yml
+
+  - name : Set the hostname
+    hostname:
+      name: "{{ hostname }}"
+
+  - name: Setup locale
+    locale_gen:
+      name: de_DE.UTF-8
+      state: present
+
+  - name: Ensure extra packages
+    package:
+      name: [ git, ]
+      state: present
+
+  - name: Ensure Timezone
+    timezone:
+      name: Europe/Berlin
+
+
+

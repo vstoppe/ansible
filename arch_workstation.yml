@@ -1,0 +1,10 @@
+---
+- hosts: archdevop
+  remote_user: root
+  #become: true
+  roles:
+    - software
+    - archbasic
+    #- devops 
+    #- xorg
+    #- plasma

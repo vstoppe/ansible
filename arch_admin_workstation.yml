@@ -1,0 +1,6 @@
+---
+- hosts: arch_admin_workstations
+  roles:
+    - archbasic
+    - xorg
+    - plasma

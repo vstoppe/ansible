@@ -1,0 +1,6 @@
+---
+
+KEYMAP: de-latin1-nodeadkeys
+acpi: true
+bluetooth: true
+custom_keyboard: true

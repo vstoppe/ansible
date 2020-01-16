@@ -1,0 +1,16 @@
+---
+cryptsetup_host_devices:
+  - name: 'crypt_root'
+    mode: 'luks'
+    ciphertext_block_device: '/dev/sda3'
+    keyfile: '~/.ansible/secrets/luks_key'
+      #    btrfs__subvolumes:
+      #      - root
+      #      - root_snapshots
+      #      - home
+      #      - home_snapshots
+      #      - pkg
+      #      - log
+      #      - virt
+      #      - virt_snapshots
+...

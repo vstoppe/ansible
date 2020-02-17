@@ -1,0 +1,40 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+	config.ssh.insert_key = false
+  #config.vm.box = "germanrio/ansible-buster"
+  config.vm.box = "debian10"
+  config.vm.synced_folder './', '/vagrant', type: 'rsync'
+  config.vm.provider :libvirt do |libvirt|
+    libvirt.host = 'irix'
+    libvirt.cpus = 2
+    libvirt.memory = 4096
+    libvirt.connect_via_ssh = true
+    libvirt.uri = 'qemu+ssh://irix/system?socket=/var/run/libvirt/libvirt-sock'
+    libvirt.username = 'root'
+	end
+
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "site.yml"
+		#ansible.inventory_path = ".vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory"
+		ansible.extra_vars = {
+			hostname: "myhostname",
+		}
+		ansible.groups = {
+			"admin_workstation" => ["default"],
+			#"devops"       => ["default"],
+			#"docker_hosts" => ["default"],
+			#"vim_host"     => ["default"],
+			#"zsh_host"     => ["default"],
+		}
+  end
+  
+	config.vm.hostname = "myhostname"
+  config.vm.define :debian10 do | vm1 |
+    vm1.vm.network :public_network,
+      :dev => "eno1",
+      :mode => "bridge",
+      :type => "bridge"
+  end
+end

@@ -1,9 +1,17 @@
 ---
 # tasks file for btrfs
 
+
+- name: Ensure btrfs-progs are installed
+  package:
+    name: btrfs-progs
+    state: present
+
 - name: Register all btrfs volumes for service management
   shell:
     cmd: mount | grep btrfs | cut -d\  -f3 | sed -e '/^\/btrfs.*$/d' -e 's/^\/$/-/' -e 's/^\///' -e 's/\//-/g'
+  args:
+    warn: false
   register: btrfs_volumes
 
 - name: enable btrfs scrubbing for all btfs volumes

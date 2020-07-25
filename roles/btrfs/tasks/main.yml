@@ -1,0 +1,14 @@
+---
+# tasks file for btrfs
+
+- name: Register all btrfs volumes for service management
+  shell:
+    cmd: mount | grep btrfs | cut -d\  -f3 | sed -e '/^\/btrfs.*$/d' -e 's/^\/$/-/' -e 's/^\///' -e 's/\//-/g'
+  register: btrfs_volumes
+
+- name: enable btrfs scrubbing for all btfs volumes
+  service:
+    name: btrfs-scrub@{{ item }}.timer
+    state: started
+    enabled: yes
+  with_items: "{{ btrfs_volumes.stdout_lines }}"

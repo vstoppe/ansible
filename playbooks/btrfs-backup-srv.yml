@@ -1,0 +1,32 @@
+---
+
+- name: BTRFS Backup host
+  hosts: btrfs_backup_hosts
+  roles:
+    - role: btrfs
+
+  tasks:
+    - name: Install packages
+      package:
+        name: [ cryptsetup, iotop, smartmontools ]
+        state: present
+
+    - name: get btrbk
+      get_url:
+        url: https://raw.githubusercontent.com/digint/btrbk/master/btrbk
+        dest: /usr/local/bin/btrbk
+        mode: 755
+
+    - name: backup dir
+      file:
+        path: /mnt/backup
+        state: directory
+
+    - name: Mount point for backup disk
+      mount:
+        path: /mnt/backup
+        src: /dev/mapper/cryptbackup
+        fstype: btrfs
+        state: present
+        opts: defaults,noauto
+

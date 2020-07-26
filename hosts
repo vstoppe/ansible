@@ -7,31 +7,40 @@ all:
       ansible_ssh_user: vagrant
       become: true
       private-key: ~/.vagrant.d/insecure_private_key
-    myhostname:
-      ansible_ssh_host: 127.0.0.1
-      ansible_ssh_port: 2222
+      users:
+      - username: vst
+        fullname: Volker Stoppe
+      mysql_dbs:
+        db1:
+          innodb_buffer_pool_size: 1G
+          autocommit: true
+        db2:
+          innodb_buffer_pool_size: 2G
+          autocommit: false
+    gateway:
       ansible_ssh_user: root
-      private-key: ~/.vagrant.d/insecure_private_key
-      hostname: default
-    indy:
-      ansible_host: 192.168.1.49
+      ansible_host: 10.1.1.57
+    irix:
       ansible_ssh_user: root
-      hostname: indy2
     macbook:
       absible_ssh_user: vst
+      ansible_host: 10.1.1.42
       become: true
+    onyx:
+      ansible_ssh_user: root
   children:
-    docker_hosts:
+    btrfs_backup_hosts:
       hosts:
-        indy:
-        default:
-        myhostname:
+        onyx:
+    docker:
+      hosts:
+        irix:
+        onyx:
     arch_admin_workstations:
       hosts:
-        default:
-        indy:
+      default:
     admins:
       hosts:
-        indy:
         macbook:
         default:
+

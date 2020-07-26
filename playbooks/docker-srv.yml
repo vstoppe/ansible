@@ -1,0 +1,9 @@
+---
+
+- name: Docker setup
+  hosts: docker
+  roles:
+    - role: btrfs
+    - role: docker
+
+

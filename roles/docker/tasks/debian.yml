@@ -1,0 +1,19 @@
+---
+
+- name: Install packages to allow apt to use a repository over HTTPS
+  package:
+    name: [ apt-transport-https, ca-certificates, curl, gnupg2, software-properties-common ]
+    state: present
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Add Dockers official GPG key
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Add Debian 10 apt repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/debian buster stable
+    state: present
+  when: ansible_facts['os_family'] == "Debian"
+

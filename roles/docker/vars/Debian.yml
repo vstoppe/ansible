@@ -1,0 +1,4 @@
+---
+
+# Docker package name in Debian:
+docker_package: docker-ce

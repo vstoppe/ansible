@@ -1,0 +1,53 @@
+---
+# tasks file for docker
+
+- name: Include OS-specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+      - "vars/{{ ansible_os_family }}.yml"
+
+  # Debian needs some extra steps:
+- include_tasks: debian.yml
+  when: ansible_os_family == 'Debian'
+
+
+- name: Ensure Docker package
+  package:
+    name: [ "{{ docker_package }}" ]
+    state: present
+
+- name: Ensure docker-compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-{{ ansible_architecture }}
+    dest: /usr/local/bin/docker-compose
+    mode: 0755
+
+- name: Ensure docker data directory
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /mnt/docker
+    - /mnt/workspace
+
+- name: Ensure docker@.service file
+  copy:
+    src: docker@.service
+    dest: /etc/systemd/system/docker@.service
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: deploy docker-cleanup.sh file
+  copy:
+    src: docker-cleanup.sh
+    dest: /usr/local/bin/docker-cleanup.sh
+    mode: 0555
+
+- name: Enable and start Docker
+  service:
+    name: docker
+    state: started
+    enabled: yes
+    daemon_reload: true

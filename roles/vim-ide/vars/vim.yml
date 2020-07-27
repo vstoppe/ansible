@@ -1,0 +1,4 @@
+---
+
+vim_global_config_file: /usr/vimrc
+vim_global_config_dir:  /etc/vim

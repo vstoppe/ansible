@@ -1,0 +1,29 @@
+---
+# tasks file for vim-ide
+
+- name: Include Vim-speciic variables
+  include_vars: "{{ vim_package }}.yml"
+
+- name: Clone vim repo
+  git:
+    repo: 'https://github.com/vstoppe/vim.git'
+    dest: "{{ vim_global_config_dir }}"
+    update: false
+
+- name: Ensure (neo)vim packages
+  package:
+    name: [ "{{ vim_package }}", psutils, socat, python-pip, git, python-pynvim ]
+    state: present
+
+- name: Ensure active vimrc link
+  file:
+    dest: "{{ vim_global_config_file }}"
+    src: "{{ vim_global_config_dir }}/vimrc"
+    state: link
+    force: yes
+
+- name: Ensure main dir for vim is set
+  lineinfile:
+    path: /etc/profile.d/vim.sh
+    line: export vimdir="{{ vim_global_config_dir }}"
+    create: true

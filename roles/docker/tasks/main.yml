@@ -31,13 +31,18 @@
     - /mnt/docker
     - /mnt/workspace
 
-- name: Ensure docker@.service file
+- name: Deploy all service files
   copy:
-    src: docker@.service
-    dest: /etc/systemd/system/docker@.service
+    src: "{{ item }}"
+    dest: "/etc/systemd/system/{{ item }}"
     owner: root
     group: root
     mode: '0644'
+  with_items:
+    - docker@.service
+    - docker-cleanup.service
+    - docker-cleanup.timer
+
 
 - name: deploy docker-cleanup.sh file
   copy:
@@ -45,9 +50,12 @@
     dest: /usr/local/bin/docker-cleanup.sh
     mode: 0555
 
-- name: Enable and start Docker
+- name: Start and Enable Services
   service:
-    name: docker
+    name: "{{ item }}"
     state: started
     enabled: yes
     daemon_reload: true
+  with_items:
+    - docker
+    - docker-cleanup.timer

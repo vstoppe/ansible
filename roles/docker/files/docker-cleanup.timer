@@ -1,0 +1,8 @@
+[Unit]
+Description=Timer for docker-cleanup.sh (clean unused container, images and volumes)
+
+[Timer]
+OnCalendar=daily
+
+[Install]
+WantedBy=default.target

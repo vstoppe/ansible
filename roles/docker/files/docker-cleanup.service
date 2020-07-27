@@ -1,0 +1,7 @@
+[Unit]
+Description=Routine for cleaning up unused docker container, images and volumes
+
+[Service]
+Restart=no
+Type=oneshot
+ExecStart=/usr/local/bin/docker-cleanup.sh

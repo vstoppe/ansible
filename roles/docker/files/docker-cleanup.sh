@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ### /etc/cron.daily/docker-clean.sh
 
 ####### List unused / dangling images #######

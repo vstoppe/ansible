@@ -2,3 +2,4 @@
 
 vim_global_config_file: /etc/xdg/nvim/init.vim
 vim_global_config_dir:  /etc/xdg/nvim
+editor: nvim

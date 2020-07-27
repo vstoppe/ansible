@@ -25,5 +25,8 @@
 - name: Ensure main dir for vim is set
   lineinfile:
     path: /etc/profile.d/vim.sh
-    line: export vimdir="{{ vim_global_config_dir }}"
+    line: "{{ item }}"
     create: true
+  with_items:
+    - export vimdir="{{ vim_global_config_dir }}"
+    - export EDITOR="{{ editor }}"

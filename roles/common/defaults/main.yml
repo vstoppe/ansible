@@ -1,2 +1,6 @@
 ---
 # defaults file for common
+
+
+default_locale: de_DE.UTF-8
+timezone: Europe/Berlin

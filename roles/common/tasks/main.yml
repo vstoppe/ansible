@@ -7,4 +7,14 @@
     name: fstrim.timer
     state: started
     enabled: true
-    
+
+
+- name: Setup locale
+  locale_gen:
+    name: "{{ default_locale }}"
+    state: present
+
+
+- name: Ensure Timezone
+  timezone:
+    name: "{{ timezone }}"

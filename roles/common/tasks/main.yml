@@ -1,0 +1,10 @@
+---
+# tasks file for common
+
+
+- name: Enable fstrim timer
+  service:
+    name: fstrim.timer
+    state: started
+    enabled: true
+    

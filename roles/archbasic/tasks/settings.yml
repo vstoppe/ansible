@@ -1,7 +1,0 @@
----
-
-- name: Setting keyamp to {{ KEYMAP }}
-  lineinfile:
-    path: /etc/vconsole.conf
-    create: yes
-    line: "KEYMAP={{ KEYMAP }}"

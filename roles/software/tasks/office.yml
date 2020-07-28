@@ -1,9 +1,0 @@
----
-
-- name: Install office-software
-  package:
-    name={{item}}
-    state=latest
-  with_items:
-    - libreoffice-still 
-    - libreoffice-still-de

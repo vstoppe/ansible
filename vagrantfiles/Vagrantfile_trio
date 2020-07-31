@@ -1,37 +1,35 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
+### -*- mode: ruby -*-
+### vi: set ft=ruby :
 
 vmset = {
-  "centos"  => { :image => "centos8"  },
-  "debian"  => { :image => "debian10" },
-  "manjaro" => { :image => "manjaro"  },
+	"centos"  => { :image => "centos8"  },
+	"debian"  => { :image => "debian10" },
+	"manjaro" => { :image => "manjaro"  },
 }
 
 Vagrant.configure("2") do |config|
 	config.ssh.insert_key = false
-
-  config.vm.provision "ansible" do |ansible|
-    ansible.become      = true
-    ansible.playbook    = "site.yml"
-		#ansible.inventory_path = "hosts_vagrant"
-    ansible.inventory_path = "~/.ansible/hosts_vagrant"
+	config.vm.provision "ansible" do |ansible|
+		ansible.become      = true
+		ansible.playbook    = "site.yml"
+		#ansible.inventory_path = "~/.ansible/hosts_vagrant"
 		ansible.groups = {
 			"admin-ws" => ["debian","centos","manjaro"],
-      "docker"   => ["debian","centos","manjaro"],
+			"docker"   => ["debian","centos","manjaro"],
 		}
-  end
-
-  vmset.each_with_index do | (hostname, info), index |
-    config.vm.define hostname do | cfg |
-      cfg.vm.box = info[:image]
-      cfg.vm.provider :virtualbox do |v|
-        v.name = "vagrant_#{hostname}"
-        v.memory = 4096
-        v.cpus = 1
-        v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-        v.customize ["modifyvm", :id, "--ioapic", "on"]
-      end # end provider
-    end # end config
-  end # end vmset
-
+  end # end provision
+	vmset.each_with_index do | (hostname, info), index |
+		config.vm.define hostname do | cfg |
+			cfg.vm.box = info[:image]
+			cfg.vm.provider :virtualbox do |v|
+				v.name = "vagrant_#{hostname}"
+				v.memory = 4096
+				v.cpus = 2
+				v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+				v.customize ["modifyvm", :id, "--ioapic", "on"]
+				v.customize ["modifyvm", :id, "--audio", "none"]
+				v.customize ["modifyvm", :id, "--vram",  "20"  ]
+			end # end provider
+		end # end config
+	end # end vmset
 end

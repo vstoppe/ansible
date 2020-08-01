@@ -1,22 +1,15 @@
+# -*- mode: ansible -*-
+# vi: set ft=ansible :
 ---
 all:
   hosts:
-    default:
-      ansible_ssh_host: 127.0.0.1
-      ansible_ssh_port: 2222
-      ansible_ssh_user: vagrant
-      become: true
-      private-key: ~/.vagrant.d/insecure_private_key
-      users:
-      - username: vst
-        fullname: Volker Stoppe
-      mysql_dbs:
-        db1:
-          innodb_buffer_pool_size: 1G
-          autocommit: true
-        db2:
-          innodb_buffer_pool_size: 2G
-          autocommit: false
+    centos:
+      ansible_host: 127.0.0.1
+      ansible_port: 2222
+    debian:
+      ansible_host: 127.0.0.1
+      ansible_port: 2223
+      ansible_user: vagrant
     gateway:
       ansible_ssh_user: root
       ansible_host: 10.1.1.57
@@ -26,21 +19,31 @@ all:
       absible_ssh_user: vst
       ansible_host: 10.1.1.42
       become: true
+    manjaro:
+      ansible_host: 127.0.0.1
+      ansible_port: 2224
     onyx:
       ansible_ssh_user: root
+    pi4:
+      ansible_ssh_user: root
+      ansible_host: 10.1.1.30
   children:
+    vagrant:
+      centos:
+      debian:
+      manjaro:
     btrfs_backup_hosts:
       hosts:
         onyx:
+        pi4:
+        debian:
+        manjaro:
     docker:
       hosts:
         irix:
         onyx:
-    arch_admin_workstations:
+        debian:
+    admin-ws:
       hosts:
-      default:
-    admins:
-      hosts:
-        macbook:
-        default:
-
+        onyx:
+        debian:

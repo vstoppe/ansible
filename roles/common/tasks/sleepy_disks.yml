@@ -1,0 +1,35 @@
+---
+
+- name: Apply hdparm.service file
+        # if disks shold be send to sleep
+  template:
+    src: hdparm.j2
+    dest: /etc/systemd/system/hdparm.service
+  notify: hdparm_restart
+  when: sleepy_disks is defined
+
+- name: Remove hdparm.service file if no sleepy_disks defined
+  file:
+    path:  /etc/systemd/system/hdparm.service
+    state: absent
+  when: sleepy_disks is undefined
+
+
+- name: Disable hdparm.service
+  service:
+    name: hdparm
+    state: stopped
+    enabled: false
+  when: sleepy_disks is undefined
+
+
+
+
+
+
+
+
+
+
+
+

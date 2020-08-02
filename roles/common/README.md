@@ -1,7 +1,13 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+This modules takes care about the common setup of every linux host.
+
+* setup users
+* Enable fstrim timer
+* Set the timezone
+
+
 
 Requirements
 ------------
@@ -11,7 +17,23 @@ Any pre-requisites that may not be covered by Ansible itself or the role should 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+		users:
+			- username: user
+				fullname: full name
+				groups: [ array, of, groups ]
+				ssh_key: 'ssh-public-key of the user'
+
+		timezone: Europe/Berlin
+
+Sleepy_disks configured disks to be send to sleep with hdparm. Value is the time value for hdparm:
+
+		sleepy_disks:
+			disk1:
+				name: /dev/sda
+				value: 240
+
+
+
 
 Dependencies
 ------------

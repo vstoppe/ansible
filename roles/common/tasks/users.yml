@@ -1,0 +1,41 @@
+---
+
+- name: Ensure wheel group
+  group:
+    name: wheel
+    state: present
+
+- name: Ensure 'wheel' group has passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: visudo -cf %s
+
+- name: ensure users
+  user:
+    name: "{{ item.username }}"
+    comment: "{{ item.fullname }}"
+    create_home: true
+    shell: /bin/bash
+    group: "{{item.groups | join(',') if 'groups' in item else ''}}"
+  with_items: '{{ users }}'
+
+- name: Set authorized_keys
+  authorized_key:
+    user: "{{ item.username }}"
+    key: "{{ item.ssh_key }}"
+    state: present
+    exclusive: true
+  with_items: '{{ users }}'
+
+
+#- name: Set authorized_keys
+#  authorized_key:
+#    user: "{{ users }}"
+#    key: "{{ users|map(attribute='ssh_key')|join('\n') }}"
+#    state: present
+#    exclusive: true
+
+

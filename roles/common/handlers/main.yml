@@ -1,2 +1,10 @@
 ---
 # handlers file for common
+
+
+- name: hdparm_restart
+  service:
+    daemon_reload: true
+    enabled: true
+    name: hdparm
+    state: restarted

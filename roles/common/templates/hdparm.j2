@@ -1,0 +1,12 @@
+[Unit]
+Description=hdparm sleep
+
+[Service]
+Type=oneshot
+
+{% for item in sleepy_disks.values() %}
+ExecStart={{ hdparm_path }} -q -M -S {{ item.value }} {{ item.name }}
+{% endfor %}
+
+[Install]
+WantedBy=multi-user.target

@@ -5,9 +5,3 @@
     name: [ hdparm, smartmontools ]
     state: present
   when: virt_modules.stdout == '0'
-
-
-
-
-
-

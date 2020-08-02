@@ -1,6 +1,16 @@
 ---
 # tasks file for common
 
+### This is used to determine if we are on a virtualized plattform
+- name: Register number of modules for virtualisation
+  shell:
+    cmd: lsmod | grep -e vbox -e virtio -e vmware | wc -l
+  register: virt_modules
+
+
+# Incluse task for managing users
+- include_tasks: users.yml
+- include_tasks: packages.yml
 
 - name: Enable fstrim timer
   service:
@@ -8,11 +18,11 @@
     state: started
     enabled: true
 
-
-- name: Setup locale
-  locale_gen:
-    name: "{{ default_locale }}"
-    state: present
+### Fehlert gerade rum, grund nicht nachvollziehbar
+#- name: Setup locale
+#  locale_gen:
+#    name: "{{ default_locale }}"
+#    state: present
 
 
 - name: Ensure Timezone

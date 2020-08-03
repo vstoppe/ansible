@@ -15,12 +15,18 @@
   when: sleepy_disks is undefined
 
 
+- name: register if hdparm.service exists
+  stat:
+    path: /etc/systemd/system/hdparm.service
+  register: hdparm_exists
+
+
 - name: Disable hdparm.service
   service:
     name: hdparm
     state: stopped
     enabled: false
-  when: sleepy_disks is undefined
+  when: sleepy_disks is undefined and hdparm_exists.stat.exists == true
 
 
 

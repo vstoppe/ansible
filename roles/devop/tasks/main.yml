@@ -1,0 +1,14 @@
+---
+# tasks file for devop
+
+- include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Ensure operations packages
+  package:
+    name: [ diffutils, dnsutils, exfat-utils, lsof, "{{nfsutils}}", nmap, psutils, rsync, sshfs, tmux, unison, unzip, wget  ]
+    state: present
+
+- name: Ensure developer pakages
+  package:
+    name: [ dnsmasq, ansible-lint, vagrant ]
+    state: present

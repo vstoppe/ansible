@@ -1,0 +1,37 @@
+---
+
+- name: set http proxy for apt if http_proxy is defined
+  lineinfile:
+    create: yes
+    line: "{{ item }}"
+    path: /etc/apt/apt.conf.d/proxy.conf
+    state: present
+  with_items:
+    - "Acquire::http::Proxy  \"http://{{ http_proxy }}\";"
+    - "Acquire::https::Proxy \"http://{{ http_proxy }}\";"
+  when: http_proxy is defined and ansible_os_family == 'Debian'
+
+- name: remove apt proxy.conf if http_proxy not defined
+  file:
+    path: /etc/apt/apt.conf.d/proxy.conf
+    state: absent
+  when: http_proxy is not defined
+
+
+- name: set global http proxy if http_proxy is defined
+  lineinfile:
+    create: yes
+    line: "{{ item }}"
+    path: /etc/profile.d/proxy.sh
+    state: present
+  with_items:
+    - "export http_proxy={{ http_proxy }}"
+    - "export https_proxy={{ http_proxy }}"
+  when: http_proxy is defined
+
+
+- name: remove global proxy.sh if http_proxy not defined
+  file:
+    path: /etc/profile.d/proxy.sh
+    state: absent
+  when: http_proxy is not defined

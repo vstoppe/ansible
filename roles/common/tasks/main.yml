@@ -12,7 +12,14 @@
 # Incluse task for managing users
 - include_tasks: users.yml
 - include_tasks: packages.yml
+- include_tasks: proxy.yml
 - include_tasks: sleepy_disks.yml
+
+- name: Install common packages for all plattforms
+  package:
+    name: [ acl, git ]
+    state: present
+    # acl can be necessary for become_user and getting privileges for temp file in vim role
 
 - name: Enable fstrim timer
   service:

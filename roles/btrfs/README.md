@@ -2,7 +2,9 @@ Role Name
 =========
 
 This roles takes care of all btrfs settings. So far it does:
-* enable for all mounted btrfs volumes the scrubbing timer
+
+* Ensure btrfs-progs
+* Enable the scrubbing timer for all mounted btrfs volumes
 
 Requirements
 ------------

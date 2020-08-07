@@ -1,0 +1,61 @@
+---
+
+
+####### prepare the process #######
+###################################
+
+- name: get user home dir
+  shell:
+    cmd: "getent passwd {{ user }} | awk -F: '{ print $6 }'"
+  register: home
+
+- name: show user var
+  debug:
+    msg: "user: {{ user }} {{ home.stdout }}"
+
+
+####### clone and install #######
+#################################
+
+- name: clone vstoppe zsh repo
+  git:
+    repo: https://github.com/vstoppe/zsh.git
+    dest: "{{ home.stdout }}/.zsh"
+    update: no
+
+- name: Execute the installer
+  command: /tmp/zsh-installer.sh --unattended
+  args:
+    creates: "{{ home.stdout }}/.oh-my-zsh"
+  become: true
+  become_user: "{{ user }}"
+
+- name: clone the powerlevel9k theme
+  git:
+    repo: https://github.com/bhilburn/powerlevel9k.git
+    dest: "{{ home.stdout }}/.oh-my-zsh/custom/themes/powerlevel9k"
+    update: no
+
+- name: clone zsh-syntax-highlighting plugin
+  git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+    dest: "{{ home.stdout }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    update: no
+
+
+####### post works #######
+##########################
+
+- name: change user shell to zsh
+  user:
+    name: "{{ user }}"
+    shell: /usr/bin/zsh
+
+- name: link the zsh configuration
+  file:
+    src: "{{ home.stdout }}/.zsh/zshrc"
+    dest: "{{ home.stdout }}/.zshrc"
+    state: link
+    force: true
+
+

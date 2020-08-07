@@ -1,0 +1,37 @@
+---
+# tasks file for zsh
+
+- name: Install zsh packages
+  package:
+    name: [ zsh, ]
+    state: present
+
+- name: install pygmentize for colorize plugin for Archlinux family
+  package:
+    name: pygmentize
+    state: present
+  when: ansible_os_family == "Archlinux"
+
+- name: install pygmentize for colorize plugin for Archlinux family
+  package:
+    name: python3-pygments
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: stat zsh_installer.sh
+  stat:
+    path: /tmp/zsh-installer.sh
+  register: zsh_installer
+
+- name: Download zsh installer
+  get_url:
+    url:  https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+    dest: /tmp/zsh-installer.sh
+    mode: 0775
+  when: zsh_installer.stat.exists == false
+
+
+- include_tasks: configure_zsh.yml
+  vars:
+    user: "{{ item }}"
+  with_items: "{{ zsh_users }}"

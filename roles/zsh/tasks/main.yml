@@ -3,7 +3,7 @@
 
 - name: Install zsh packages
   package:
-    name: [ zsh, ]
+    name: [zsh]
     state: present
 
 - name: install pygmentize for colorize plugin for Archlinux family
@@ -25,7 +25,7 @@
 
 - name: Download zsh installer
   get_url:
-    url:  https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+    url: https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
     dest: /tmp/zsh-installer.sh
     mode: 0775
   when: zsh_installer.stat.exists == false

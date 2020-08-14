@@ -1,0 +1,11 @@
+---
+
+- name: Docker setup
+  hosts: admin-ws
+  roles:
+    - role: common
+    - role: vim-ide
+    - role: zsh
+
+
+

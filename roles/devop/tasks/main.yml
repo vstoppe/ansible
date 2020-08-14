@@ -3,12 +3,21 @@
 
 - include_vars: "{{ ansible_os_family }}.yml"
 
-- name: Ensure operations packages
+- name: define list of general packages
+  set_fact:
+    general_packages: [diffutils, lsof, nmap, rsync, tmux, unzip, wget]
+
+- name: define list of general dev packages
+  set_fact:
+    general_dev_packages: [dnsmasq]
+
+
+- name: Ensure operations packages for all distributions
   package:
-    name: [ diffutils, dnsutils, exfat-utils, lsof, "{{nfsutils}}", nmap, psutils, rsync, sshfs, tmux, unison, unzip, wget  ]
+    name: "{{ general_packages }} + {{distro_specific_admin_packages}}"
     state: present
 
 - name: Ensure developer pakages
   package:
-    name: [ dnsmasq, ansible-lint, vagrant ]
+    name: "{{ general_packages }} + {{ distro_specific_dev_packages }}"
     state: present

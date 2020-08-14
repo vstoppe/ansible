@@ -1,3 +1,5 @@
 ---
+# Archlinux
 
-nfsutils: nfs-utils
+distro_specific_admin_packages: [nfs-utils]
+distro_specific_dev_packages: [ansible, ansible-lint]

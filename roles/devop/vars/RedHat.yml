@@ -1,0 +1,12 @@
+---
+# RedHat
+
+distro_specific_admin_packages: [bind-utils, nfs-utils]
+distro_specific_dev_packages: []
+
+# Packages not available in RedHat main Repo:
+# * dnsutils
+# * exfat-utils
+# * psutils
+# * sshfs
+# * unison

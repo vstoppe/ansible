@@ -1,3 +1,6 @@
 ---
+# Debian
 
-nfsutils: nfs-common
+
+distro_specific_admin_packages: [nfs-common]
+distro_specific_dev_packages: [ansible, ansible-lint]

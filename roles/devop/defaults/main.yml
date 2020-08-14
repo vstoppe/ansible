@@ -1,2 +1,4 @@
 ---
 # defaults file for devop
+
+distro_specific_admin_packages: [dnsutils, exfat-utils, nfs-utils, psutils, sshfs, unison]

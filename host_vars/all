@@ -1,4 +1,0 @@
----
-all:
-  indy:
-    hostname: indy2

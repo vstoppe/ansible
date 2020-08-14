@@ -1,36 +1,38 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
+### -*- mode: ruby -*-
+### vi: set ft=ruby :
+
+vmset = {
+	"centos"  => { :image => "centos8"  },
+	"debian"  => { :image => "debian10" },
+	"manjaro" => { :image => "manjaro"  },
+}
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "debian10"
 	config.ssh.insert_key = false
-
-
-  config.vm.provider :virtualbox do |v|
-    v.name = "docker"
-    v.memory = 4096
-    v.cpus = 2
-    v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-    v.customize ["modifyvm", :id, "--ioapic", "on"]
-	end
-
-  config.vm.provision "ansible" do |ansible|
-    #ansible.playbook = "site.yml"
-    ansible.playbook = "playbooks/manage-users.yml"
-		ansible.inventory_path = "hosts"
-		ansible.extra_vars = {
-			hostname: "myhostname",
-		}
-		ansible.groups = {
-			"admin_workstation" => ["default"],
-      
-			#"devops"       => ["default"],
-			#"docker_hosts" => ["default"],
-			#"vim_host"     => ["default"],
-			#"zsh_host"     => ["default"],
-		}
-  end
-  
-	config.vm.hostname = "myhostname"
-
-end
+	vmset.each_with_index do | (hostname, info), index |
+		config.vm.define hostname do | cfg |
+			cfg.vm.box = info[:image]
+			
+			cfg.vm.provider :virtualbox do |v|
+				v.name = "vagrant_#{hostname}"
+				v.memory = 4096
+				v.cpus = 2
+				v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+				v.customize ["modifyvm", :id, "--ioapic", "on"]
+				v.customize ["modifyvm", :id, "--audio", "none"]
+				v.customize ["modifyvm", :id, "--vram",  "20"  ]
+			end # end provider
+			
+			cfg.vm.provision "ansible" do |ansible|
+				ansible.become      = true
+				ansible.playbook    = "site.yml"
+				#ansible.inventory_path = "~/.ansible/hosts_vagrant"
+				ansible.groups = {
+					"admin-ws" => ["debian","centos","manjaro"],
+					"docker"   => ["debian","centos","manjaro"],
+				}
+			end # provision
+				
+		end # end vm.devine
+	end # end vmset
+end # config

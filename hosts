@@ -1,5 +1,3 @@
-# -*- mode: ansible -*-
-# vi: set ft=ansible :
 ---
 all:
   hosts:
@@ -29,21 +27,20 @@ all:
       ansible_host: 10.1.1.30
   children:
     vagrant:
-      centos:
-      debian:
-      manjaro:
+      hosts:
+        centos:
+        debian:
+        manjaro:
     btrfs_backup_hosts:
       hosts:
         onyx:
         pi4:
-        debian:
         manjaro:
     docker:
       hosts:
         irix:
         onyx:
-        debian:
     admin-ws:
       hosts:
         onyx:
-        debian:
+        pi:

@@ -7,7 +7,7 @@
     cmd: lsmod | grep -e vbox -e virtio -e vmware | wc -l
   register: virt_modules
 
-- include_vars: "{{ ansible_os_family }}.yaml"
+- include_vars: "{{ ansible_os_family }}.yml"
 
 # Incluse task for managing users
 - include_tasks: users.yml

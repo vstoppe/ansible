@@ -4,6 +4,7 @@
   hosts: docker
   roles:
     - role: btrfs
+    - role: common
     - role: docker
 
 

@@ -3,12 +3,13 @@
 - name: BTRFS Backup host
   hosts: btrfs_backup_hosts
   roles:
+    - role: common
     - role: btrfs
 
   tasks:
     - name: Install packages
       package:
-        name: [ cryptsetup, iotop, smartmontools ]
+        name: [ cryptsetup, btrfs-progs ]
         state: present
 
     - name: get btrbk

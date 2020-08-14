@@ -1,8 +1,5 @@
 ---
-#- import_playbook: encrypted_arch_install.yml
-#- import_playbook: arch_workstation.yml
-- import_playbook: admin_workstation.yml
 - import_playbook: playbooks/btrfs-backup-srv.yml
 - import_playbook: playbooks/docker-srv.yml
-- import_playbook: playbooks/setup-vim.yml
-- import_playbook: playbooks/setup-zsh.yml
+- import_playbook: playbooks/vagrant.yml
+  #- import_playbook: docker-srv.yml

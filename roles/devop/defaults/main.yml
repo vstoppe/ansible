@@ -1,4 +1,5 @@
 ---
 # defaults file for devop
 
+general_packages: [diffutils, lsof, nmap, rsync, tmux, unzip, wget]
 distro_specific_admin_packages: [dnsutils, exfat-utils, nfs-utils, psutils, sshfs, unison]

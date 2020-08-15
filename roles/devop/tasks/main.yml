@@ -3,10 +3,6 @@
 
 - include_vars: "{{ ansible_os_family }}.yml"
 
-- name: define list of general packages
-  set_fact:
-    general_packages: [diffutils, lsof, nmap, rsync, tmux, unzip, wget]
-
 - name: define list of general dev packages
   set_fact:
     general_dev_packages: [dnsmasq]

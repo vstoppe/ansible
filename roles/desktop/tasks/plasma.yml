@@ -1,0 +1,5 @@
+---
+
+- name: install plasma packages
+  package:
+    name: "{{ packages_plasma }}"

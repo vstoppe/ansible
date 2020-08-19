@@ -1,0 +1,18 @@
+---
+# defaults file for desktop
+
+# display_backend should make the choice between xorg, wayland or both
+display_backend: [xorg]
+
+# There can only be one display manager
+display_manager: sddm
+
+
+# desktop_system could make the choice btween plasma, gnome, xfce in the future
+desktop_system: [plasma]
+
+
+wayland_packages_general: [wayland, weston]
+xorg_packages_general: [xorg-server, xorg-xinit]
+
+packages_plasma: [dolphin, dolphin-plugins, okular, plasma-desktop]

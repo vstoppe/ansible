@@ -1,0 +1,19 @@
+---
+
+- name: check for graphic device
+  shell:
+    cmd: lspci | grep -e VGA -e peripheral
+  register: graphic_device
+
+- name: ensure general xorg packages
+  package:
+    name: "{{ xorg_packages_general }}"
+
+- name: debug graphics
+  debug:
+    msg: "{{ graphic_device.stdout }}"
+
+- name: install virtualbox graphics
+  package:
+    name: virtualbox-guest-utils
+  when: '"VirtualBox" in graphic_device.stdout'

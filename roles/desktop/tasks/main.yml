@@ -1,0 +1,21 @@
+---
+
+# tasks file for desktop
+
+- name: apply xorg if wanted
+  include_tasks: xorg.yml
+  when: '"xorg" in display_backend'
+
+- name: apply plasma desktop if wanted
+  include_tasks: plasma.yml
+  when: '"plasma" in desktop_system'
+
+- name: apply sddm display manager if wanted
+  include_tasks: sddm.yml
+  when: '"sddm" in display_manager'
+
+- name: ensure sddm service is started and running
+  service:
+    name: sddm
+    started: true
+    enabled: true

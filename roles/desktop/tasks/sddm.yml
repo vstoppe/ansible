@@ -9,8 +9,9 @@
     name: sddm-kcm
   when: '"plasma" in desktop_system'
 
+  # Ansible thinks that this operation fails even when it works
 - name: ensure sddm service is started and running
   service:
     name: sddm
-    state: stopped
-    enabled: false
+    state: started
+    enabled: true

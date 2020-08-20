@@ -13,9 +13,3 @@
 - name: apply sddm display manager if wanted
   include_tasks: sddm.yml
   when: '"sddm" in display_manager'
-
-- name: ensure sddm service is started and running
-  service:
-    name: sddm
-    started: true
-    enabled: true

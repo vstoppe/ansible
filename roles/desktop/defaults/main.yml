@@ -15,4 +15,8 @@ desktop_system: [plasma]
 wayland_packages_general: [wayland, weston]
 xorg_packages_general: [xorg-server, xorg-xinit]
 
-packages_plasma: [dolphin, dolphin-plugins, okular, plasma-desktop]
+packages_plasma: [dolphin, dolphin-plugins, okular, plasma-desktop, print-manager, kate, systemd-kcm, ksshaskpass, kdegraphics-thumbnailers, spectacle, kdialog, plasma-nm ]
+# * kscreen: KDE's screen management software
+# * spectacle: KDE screenshot capture utility
+# * kdialog: A utility for displaying dialog boxes from shell scripts
+# * plasma-nm: Plasma applet written in QML for managing network connections

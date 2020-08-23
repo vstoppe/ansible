@@ -1,0 +1,14 @@
+---
+### Debian specific tasks
+
+- name: Enable contrib non-free repos
+  copy:
+    src: debian10_extra_repos.list
+    dest: /etc/apt/sources.list.d/extra_repos.list
+
+
+- name: install virtualbox-iso-package
+  package:
+    name: virtualbox-guest-additions-iso
+    state: latest
+  when: ansible_virtualization_type == "virtualbox"

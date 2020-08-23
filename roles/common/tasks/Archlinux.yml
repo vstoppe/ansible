@@ -1,2 +1,22 @@
 ---
 ### For now dummy file for Archlinux specific tasks
+
+
+- name: Apply rua dependencies
+  package:
+    name: [git, base-devel, bubblewrap-suid, xz, shellcheck, cargo]
+    state: latest
+
+- name: clone rua (AUR management)
+  command: git clone https://aur.archlinux.org/rua.git
+  args:
+    creates: rua
+  become: false
+  become_user: "{{ ansible_user }}"
+
+- name: install rua (AUR management)
+  command: makepkg -si --noconfirm
+  args:
+    chdir: rua
+  become: false
+  become_user: "{{ ansible_user }}"

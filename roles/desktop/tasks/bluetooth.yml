@@ -1,0 +1,18 @@
+---
+
+- name: apply bluetooth packages
+  package:
+    name: [bluez]
+    state: latest
+
+- name: apply bluedevil bluetooth tools for kde plasma
+  package:
+    name: bluedevil
+    state: latest
+  when: '"plasma" in desktop_system'
+
+- name: ensure bluetooth daemon is up and running
+  systemd:
+    name: bluetooth
+    state: started
+    enabled: true

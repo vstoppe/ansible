@@ -9,6 +9,18 @@
     path: /dev/sr0
   register: sr0_status
 
+  # If Bluetooth kernel module is found, install the necessary packages.
+  # This is done in the desktop role because I never installed bluetooth utilities on a headless system.
+- name: check for loaded bluetooth kernel module
+  command: modinfo bluetooth
+  register: modinfo_bluetooth
+  ignore_errors: true
+  # 0: Bluetooth kernel Module found / 1: No bluetooth kernel moudle found
+
+- name: apply bluetooth stuff
+  include_tasks: bluetooth.yml
+  when: modinfo_bluetooth.rc == 0
+
 - name: apply xorg if wanted
   include_tasks: xorg.yml
   when: '"xorg" in display_backend'
@@ -17,6 +29,7 @@
   include_tasks: plasma.yml
   when: '"plasma" in desktop_system'
 
+  # I apply the network manager in the desktop role because I never use it on non desktop systems
 - name: apply networkmanager
   include_tasks: networkmanager.yml
 

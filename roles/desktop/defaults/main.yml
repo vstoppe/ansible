@@ -1,5 +1,10 @@
 ---
-# defaults file for desktop
+# default vars for desktop role
+
+### This string will be taken localized package names
+country: de
+
+desktop_general_packages:
 
 # display_backend should make the choice between xorg, wayland or both
 display_backend: [xorg]
@@ -11,12 +16,19 @@ display_manager: sddm
 # desktop_system could make the choice btween plasma, gnome, xfce in the future
 desktop_system: [plasma]
 
+cdtools: [cdparanoia, cdrdao, dvd+rw-tools]
+
+networkmanager: [networkmanager, networkmanager-vpnc]
 
 wayland_packages_general: [wayland, weston]
-xorg_packages_general: [xorg-server, xorg-xinit]
+xorg_packages_general: [mesa, xorg-server, xorg-xinit]
+xorg_package_intel: xf86-video-intel
 
-packages_plasma: [dolphin, dolphin-plugins, okular, plasma-desktop, print-manager, kate, systemd-kcm, ksshaskpass, kdegraphics-thumbnailers, spectacle, kdialog, plasma-nm ]
-# * kscreen: KDE's screen management software
+packages_plasma: [dolphin, dolphin-plugins, okular, plasma-desktop, kate, ksshaskpass, kdegraphics-thumbnailers, konsole, spectacle, kdialog, plasma-nm]
+# * kscreen: KDE's screen management softwarejj
 # * spectacle: KDE screenshot capture utility
 # * kdialog: A utility for displaying dialog boxes from shell scripts
 # * plasma-nm: Plasma applet written in QML for managing network connections
+
+
+virtualbox_xorg_support: virtualbox-guest-utils

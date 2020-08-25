@@ -1,0 +1,36 @@
+---
+
+- name: apply desktop applications for Archlinux
+  package:
+    name:
+      - firefox
+      - firefox-i18n-{{ country }}
+      - libreoffice-still
+      - libreoffice-still-{{ country }}
+    state: latest
+  when: ansible_os_family == "Archlinux"
+
+- name: apply desktop applications for Debian
+  package:
+    name:
+      - firefox-esr
+      - firefox-esr-l10n-{{ country }}
+      - libreoffice
+      - libreoffice-l10n-{{ country }}
+      - mythes-{{ country }}
+    state: latest
+  when: ansible_os_family == "Debian"
+
+- name: apply desktop applications for CentOS 8
+  package:
+    name:
+      - firefox
+      - libreoffice-calc
+      - libreoffice-draw
+      - libreoffice-impress
+      - libreoffice-writer
+      - libreoffice-langpack-{{ country }}
+      - libreoffice-help-{{ country }}
+      - libreoffice-pdfimport
+    state: latest
+  when: ansible_os_family == "RedHat"

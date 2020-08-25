@@ -1,0 +1,7 @@
+---
+### Archlinux spcific vars
+
+cdtools_dist_specific: [cdrtools, transcode]
+packages_plasma_distro_specific: [elisa, print-manager, systemd-kcm]
+sddm_kcm: sddm-kcm
+libre_office: libreoffice-still libreoffice-still-{{ country }}

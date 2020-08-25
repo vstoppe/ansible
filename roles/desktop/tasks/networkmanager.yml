@@ -1,0 +1,12 @@
+---
+
+- name: apply network mananager
+  package:
+    name: "{{ networkmanager }}"
+    state: latest
+
+- name: ensure networkmanager service
+  systemd:
+    name: NetworkManager
+    state: started
+    enabled: true

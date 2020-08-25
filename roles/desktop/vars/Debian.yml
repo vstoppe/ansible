@@ -1,0 +1,9 @@
+---
+### Debian specific vars
+
+cdtools_dist_specific: [wodim]
+networkmanager: [network-manager, network-manager-vpnc]
+packages_plasma_distro_specific: [kde-config-systemd, print-manager]
+sddm_kcm: kde-config-sddm
+virtualbox_xorg_support: xserver-xorg-video-vmware
+xorg_packages_general: [xserver-xorg, xinit]

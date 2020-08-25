@@ -1,0 +1,8 @@
+---
+### RedHat specific vars
+xorg_packages_general: [xorg-x11-server-Xorg, xorg-x11-xinit, mesa-dri-drivers]
+networkmanager: [NetworkManager]
+virtualbox_xorg_support: xorg-x11-drv-vmware  # virtualbox-guest-utils
+packages_plasma_distro_specific: [kde-config-systemd, kde-print-manager]
+sddm_kcm: sddm-kcm
+cdtools_dist_specific: [wodim]

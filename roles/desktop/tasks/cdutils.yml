@@ -1,0 +1,12 @@
+---
+
+- name: Apply general cd bruning packages and tools for plasma
+  package:
+    name: "{{ cdtools }} + {{ cdtools_dist_specific }}"
+    state: latest
+
+- name: Apply Plasma cd burner k3b
+  package:
+    name: k3b
+    state: latest
+  when: '"plasma" in desktop_system'

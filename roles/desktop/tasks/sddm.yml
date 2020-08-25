@@ -6,7 +6,7 @@
 
 - name: apply sddm contol center package
   package:
-    name: sddm-kcm
+    name: "{{ sddm_kcm }}"
   when: '"plasma" in desktop_system'
 
   # Ansible thinks that this operation fails even when it works

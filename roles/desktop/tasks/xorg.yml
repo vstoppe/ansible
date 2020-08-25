@@ -1,8 +1,10 @@
 ---
 
+- include_vars: "{{ ansible_os_family }}.yml"
+
 - name: check for graphic device
   shell:
-    cmd: lspci | grep -e VGA -e peripheral
+    cmd: lspci | grep VGA
   register: graphic_device
 
 - name: ensure general xorg packages
@@ -13,7 +15,8 @@
   debug:
     msg: "{{ graphic_device.stdout }}"
 
+
 - name: install virtualbox graphics
   package:
-    name: virtualbox-guest-utils
-  when: '"VirtualBox" in graphic_device.stdout'
+    name: "{{ virtualbox_xorg_support }}"
+  when: ansible_virtualization_type == "virtualbox"

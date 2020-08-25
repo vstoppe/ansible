@@ -2,6 +2,13 @@
 
 # tasks file for desktop
 
+- include_vars: "{{ ansible_os_family }}.yml"
+
+- name: check if cd device /dev/sr0 exists
+  stat:
+    path: /dev/sr0
+  register: sr0_status
+
 - name: apply xorg if wanted
   include_tasks: xorg.yml
   when: '"xorg" in display_backend'
@@ -10,6 +17,16 @@
   include_tasks: plasma.yml
   when: '"plasma" in desktop_system'
 
+- name: apply networkmanager
+  include_tasks: networkmanager.yml
+
 - name: apply sddm display manager if wanted
   include_tasks: sddm.yml
   when: '"sddm" in display_manager'
+
+- name: apply cd-utils
+  include_tasks: cdutils.yml
+  when: sr0_status.stat.isreg is defined
+
+- name: apply desktop applications
+  include_tasks: applications.yml

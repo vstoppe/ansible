@@ -24,7 +24,7 @@ wayland_packages_general: [wayland, weston]
 xorg_packages_general: [mesa, xorg-server, xorg-xinit]
 xorg_package_intel: xf86-video-intel
 
-packages_plasma: [dolphin, dolphin-plugins, okular, plasma-desktop, kate, ksshaskpass, kdegraphics-thumbnailers, konsole, spectacle, kdialog, plasma-nm]
+packages_plasma: [dolphin, dolphin-plugins, plasma-desktop, kate, ksshaskpass, kdegraphics-thumbnailers, konsole, okular, spectacle, kdialog, plasma-nm, powerdevil]
 # * kscreen: KDE's screen management softwarejj
 # * spectacle: KDE screenshot capture utility
 # * kdialog: A utility for displaying dialog boxes from shell scripts

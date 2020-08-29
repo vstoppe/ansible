@@ -1,0 +1,26 @@
+---
+### This file configures the global vim configuration without plugins
+
+- name: deploy global vim config files
+  copy:
+    src: "{{ vim_file }}"
+    dest: "/etc/vim//{{ vim_file }}"
+  with_items:
+    - common.vim
+    - filetype_settings.vim
+    - splitscreen.vim
+    - statusline.vim
+    - vimrc.local
+  loop_control:
+    loop_var: vim_file
+
+- name: ensure nvim global config dir
+  file:
+    state: directory
+    path: /etc/xdg/nvim
+
+- name: link global config file for neovim
+  file:
+    state: link
+    src: /etc/vim/vimrc
+    dest: /etc/xdg/nvim/init.vim

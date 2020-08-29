@@ -1,7 +1,7 @@
 Role Name
 =========
 
-This role sets up a (neo)vim configuration from vstoppe´s vim git repo
+This role sets up a (neo)vim configuration from vstoppe´s vim git repo for specified vim_usrs. It also installs a global vim config without plugins. 
 
 Requirements
 ------------

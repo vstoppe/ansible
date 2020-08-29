@@ -1,0 +1,4 @@
+source /etc/vim/common.vim " common setting which do not affect plugins
+source /etc/vim/filetype_settings.vim
+source /etc/vim/splitscreen.vim " source split screen key bindings
+source /etc/vim/statusline.vim  " power-/airline relacement without plugins

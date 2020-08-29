@@ -15,11 +15,8 @@
 - name: Ensure main dir for vim is set
   lineinfile:
     path: /etc/profile.d/vim.sh
-    line: "{{ item }}"
+    line: export EDITOR="{{ editor }}"
     create: true
-  with_items:
-    - export vimdir="{{ vim_global_config_dir }}"
-    - export EDITOR="{{ editor }}"
 
 - include_tasks: configure_vim.yml
   vars:
@@ -27,3 +24,6 @@
   with_items: "{{ vim_users }}"
   loop_control:
     loop_var: vim_user
+
+- include_tasks: global_vim.yml
+  

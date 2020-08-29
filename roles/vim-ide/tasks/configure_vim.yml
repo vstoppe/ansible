@@ -1,0 +1,47 @@
+---
+
+####### prepare the process #######
+###################################
+
+- name: get user home dir
+  shell:
+    cmd: "getent passwd {{ user }} | awk -F: '{ print $6 }'"
+  register: home
+
+- name: show user var
+  debug:
+    msg: "user: {{ user }} {{ home.stdout }}"
+
+####### clone and install #######
+#################################
+
+- name: Clone vim repo
+  git:
+    repo: 'https://github.com/vstoppe/vim.git'
+    dest: "{{ home.stdout }}/.vim"
+    update: false
+
+- name: Ensure active vimrc link for normal vim
+  file:
+    dest: "{{ home.stdout }}/.vimrc"
+    src: "{{ home.stdout }}/.vim/vimrc"
+    state: link
+    force: true
+
+- name: Ensure directories for neovim configuration
+  file:
+    path: "{{ home.stdout }}/{{ dirs }}"
+    state: directory
+    owner: "{{ vim_user }}"
+  with_items:
+    - .config
+    - .config/nvim
+  loop_control:
+    loop_var: dirs
+
+- name: Ensure active vimrc link for neovim
+  file:
+    dest: "{{ home.stdout }}/.config/nvim/init.vim"
+    src: "{{ home.stdout }}/.vim/vimrc"
+    state: link
+    force: true

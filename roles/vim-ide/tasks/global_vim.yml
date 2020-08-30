@@ -1,6 +1,11 @@
 ---
 ### This file configures the global vim configuration without plugins
 
+- name: Ensure global vim config directory exists
+  file:
+    state: directory
+    path: /etc/vim
+
 - name: deploy global vim config files
   copy:
     src: "{{ vim_file }}"
@@ -22,5 +27,5 @@
 - name: link global config file for neovim
   file:
     state: link
-    src: /etc/vim/vimrc
+    src: /etc/vim/vimrc.local
     dest: /etc/xdg/nvim/init.vim

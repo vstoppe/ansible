@@ -18,5 +18,6 @@
   command: makepkg -si --noconfirm
   args:
     chdir: rua
+    creates: /usr/bin/rua
   become: false
   become_user: "{{ ansible_user }}"

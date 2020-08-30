@@ -1,0 +1,48 @@
+---
+
+### Managed activties in user context
+
+####### collect information needed for executing tasks #######
+##############################################################
+
+- name: get user home dir
+  shell:
+    cmd: "getent passwd {{ user }} | awk -F: '{ print $6 }'"
+  register: home
+
+- name: Register the uid of the user in the ansible facts
+  getent: database=passwd key={{user}}
+
+
+####### Do things #######
+#########################
+
+- name: Ensure directories for user systemd files
+  file:
+    state: directory
+    path: "{{ home.stdout }}/{{ dir }}"
+    owner: "{{ user }}"
+  with_items:
+    - .config
+    - .config/systemd
+    - .config/systemd/user
+  loop_control:
+    loop_var: dir
+
+- name: copy ssh-agent to user-home
+  copy:
+    src: ssh-agent.service
+    dest: "{{ home.stdout }}/.config/systemd/user/ssh-agent.service"
+    owner: "{{ user }}"
+
+- name: Enable ssh-agent for user
+  become: true
+  become_user: "{{ user }}"
+  environment:
+    XDG_RUNTIME_DIR: "/run/user/{{ ansible_facts['getent_passwd'][user][1] }}"
+  systemd:
+    name: ssh-agent
+    daemon_reload: true
+    enabled: true
+    scope: user
+    state: restarted

@@ -21,6 +21,7 @@
     shell: /bin/bash
     group: "{{item.groups | join(',') if 'groups' in item else ''}}"
   with_items: '{{ users }}'
+  when: users is defined
 
 - name: Set authorized_keys
   authorized_key:
@@ -29,7 +30,13 @@
     state: present
     exclusive: true
   with_items: '{{ users }}'
+  when: users is defined
 
+- include_tasks: user_inside.yml
+  vars:
+    user: "{{ item.username }}"
+  with_items: "{{ users }}"
+  when: users is defined
 
 #- name: Set authorized_keys
 #  authorized_key:
@@ -37,5 +44,3 @@
 #    key: "{{ users|map(attribute='ssh_key')|join('\n') }}"
 #    state: present
 #    exclusive: true
-
-

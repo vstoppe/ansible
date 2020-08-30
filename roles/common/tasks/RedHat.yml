@@ -1,2 +1,10 @@
 ---
 ### For now dummy file for RedHat specific tasks
+
+- name: apply epel repo
+  package:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+    state: present
+
+- name: enable PowerTools for CentOS 8
+  command: dnf config-manager --set-enabled PowerTools

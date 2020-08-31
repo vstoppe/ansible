@@ -19,7 +19,7 @@
 
 - name: Install common packages for all plattforms
   package:
-    name: [acl, at, gdisk, git]
+    name: [acl, at, bash-completion, gdisk, git]
     state: present
     # acl can be necessary for become_user and getting privileges for temp file in vim role
 

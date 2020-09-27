@@ -9,8 +9,9 @@
   tasks:
     - name: Install packages
       package:
-        name: [cryptsetup, btrfs-progs]
+        name: [cryptsetup, btrfs-progs, mbuffer]
         state: present
+  # mbuffer ist needed for btrbks "--progress"
 
     - name: get btrbk
       get_url:

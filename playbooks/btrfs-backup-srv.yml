@@ -9,7 +9,7 @@
   tasks:
     - name: Install packages
       package:
-        name: [ cryptsetup, btrfs-progs ]
+        name: [cryptsetup, btrfs-progs]
         state: present
 
     - name: get btrbk
@@ -30,4 +30,3 @@
         fstype: btrfs
         state: present
         opts: defaults,noauto
-

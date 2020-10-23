@@ -3,24 +3,30 @@ all:
   hosts:
     centos:
       ansible_port: 2225
+    celsius:
+        ansible_ssh_user: ansible
+        ansible_user: ansible
+        ansible_host: 10.1.1.37
     debian:
       ansible_port: 2223
-    gateway:
-      ansible_ssh_user: root
-      ansible_host: 10.1.1.57
     irix:
-      ansible_ssh_user: root
+      ansible_user: vst
+      ansible_ssh_user: vst
     macbook:
-      absible_ssh_user: vst
       ansible_host: 10.1.1.42
-      become: true
+      ansible_user: vst
     manjaro:
       ansible_port: 2224
     onyx:
-      ansible_ssh_user: root
+      ansible_user: vst
+      ansible_ssh_user: vst
+    pi3:
+      ansible_ssh_user: pi
     pi4:
       ansible_ssh_user: root
       ansible_host: 10.1.1.30
+  vars:
+    ansible_become: true
   children:
     vagrant:
       hosts:
@@ -34,14 +40,14 @@ all:
         ansible_user: vagrant
     btrfs_backup_hosts:
       hosts:
-        onyx:
+        pi3:
         pi4:
         manjaro:
     docker:
       hosts:
         irix:
-        onyx:
     admin-ws:
       hosts:
+        celsius:
         onyx:
         pi:

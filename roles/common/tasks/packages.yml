@@ -2,6 +2,6 @@
 
 - name: Install common packages for non virtualized plattforms
   package:
-    name: [acpid, hdparm, lm_sensors, smartmontools]
+    name: [acpid, hdparm, "{{ lmsensors }}", smartmontools]
     state: present
   when: virt_modules.stdout == '0'

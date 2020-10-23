@@ -1,3 +1,4 @@
 ---
 
 hdparm_path: /usr/sbin/hdparm
+lmsensors: lm-sensors

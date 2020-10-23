@@ -5,10 +5,11 @@
   copy:
     src: debian10_extra_repos.list
     dest: /etc/apt/sources.list.d/extra_repos.list
+  when: ansible_architecture == "x86_64"
 
 
 - name: install virtualbox-iso-package
   package:
     name: virtualbox-guest-additions-iso
     state: latest
-  when: ansible_virtualization_type == "virtualbox"
+  when: ansible_virtualization_type == "virtualbox" and ansible_architecture == "x86_64"

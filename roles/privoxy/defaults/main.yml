@@ -1,0 +1,7 @@
+---
+# defaults file for privoxy
+
+listen_address: 0.0.0.0:8118
+privoxy_user: privoxy
+privoxy_group: nogroup
+privoxy_urls: "https://easylist-downloads.adblockplus.org/easylistgermany.txt"

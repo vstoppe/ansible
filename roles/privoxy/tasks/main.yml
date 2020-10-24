@@ -1,0 +1,40 @@
+---
+# tasks file for privoxy
+#
+#
+- name: Install privoxy
+  package:
+    name: privoxy
+    state: present
+
+- name: Ensure privoxy blocklist updater
+  copy:
+    dest: /usr/local/bin/privoxy-blocklist.sh
+    src: privoxy-blocklist.sh
+    mode: 0775
+
+- name: copy service files
+  copy:
+    dest: /etc/systemd/system/{{ item }}
+    src: "{{ item }}"
+  with_items:
+    - privoxy-blocklist.service
+    - privoxy-blocklist.timer
+  notify: privoxy-blocklist_reload
+
+
+- name: privoxy configuration
+  template:
+    src: config.j2
+    dest: /etc/privoxy/config
+  notify: privoxy_restart
+
+- name: ensure /etc/conf.d
+  file:
+    path: /etc/conf.d
+    state: directory
+
+- name: deploy privoxy-blacklist-configuration
+  template:
+    src: privoxy-blacklist-config.j2
+    dest: /etc/conf.d/privoxy-blacklist

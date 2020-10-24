@@ -1,0 +1,13 @@
+---
+# handlers file for privoxy
+
+- name: privoxy_restart
+  ansible.builtin.service:
+    daemon_reload: true
+    enable: true
+    name: privoxy
+    state: restarted
+
+- name: privoxy-blocklist_reload
+  service:
+    daemon_reload: true

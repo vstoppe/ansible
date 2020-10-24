@@ -1,0 +1,9 @@
+[Unit]
+Description=Monthly get new blocklists
+
+[Timer]
+OnCalendar=monthly
+Persistent=true
+
+[Install]
+WantedBy=multi-user.target

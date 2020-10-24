@@ -1,0 +1,6 @@
+[Unit]
+Description=Update privoxy blocklist
+
+[Service]
+Restart=no
+ExecStart=/usr/local/bin/privoxy-blocklist.sh

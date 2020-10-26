@@ -17,13 +17,19 @@
     name: [ "{{ docker_package }}" ]
     state: present
 
-- name: Ensure docker-compose
+- name: Ensure docker-compose for x86_64"
   get_url:
     url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-{{ ansible_architecture }}
     dest: /usr/local/bin/docker-compose
     mode: 0755
   when: ansible_architecture == "x86_64"
   # (there is no binary for docker-compose on arm64)
+
+- name: Ensure docker-compose for aarch64
+  package:
+    name: docker-compose
+    state: present
+  when: ansible_architecturre == "aarch64"
 
 - name: Ensure docker data directory
   file:

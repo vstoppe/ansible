@@ -8,7 +8,7 @@
 
   - name: Ensure zsh packages
     package:
-      name: [ zsh, zsh-theme-powerlevel9k ]
+      name: [zsh, zsh-theme-powerlevel9k]
       state: present
 
   - name: Clone zsh repo for root user

@@ -2,4 +2,4 @@
 # defaults file for docker
 
 # Version of docker_compose to install:
-docker_compose_version: 1.26.2
+docker_compose_version: 1.27.4

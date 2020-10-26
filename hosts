@@ -9,6 +9,8 @@ all:
         ansible_host: 10.1.1.37
     debian:
       ansible_port: 2223
+    homebox:
+      ansible_user: root
     irix:
       ansible_user: vst
       ansible_ssh_user: vst
@@ -24,10 +26,31 @@ all:
       ansible_ssh_user: pi
     pi4:
       ansible_ssh_user: root
-      ansible_host: 10.1.1.30
+    zero:
+      ansible_ssh_user: pi
+      ansible_become: true
   vars:
     ansible_become: true
   children:
+    adblocker:
+      hosts:
+        zero:
+        debian:
+        pi4:
+    btrfs_backup_hosts:
+      hosts:
+        pi3:
+        pi4:
+        manjaro:
+    docker:
+      hosts:
+        irix:
+        homebox:
+    admin-ws:
+      hosts:
+        celsius:
+        onyx:
+        pi:
     vagrant:
       hosts:
         centos:
@@ -38,16 +61,9 @@ all:
         ansible_host: 127.0.0.1
         ansible_ssh_private_key_file: ~/.ssh/vagrant.key
         ansible_user: vagrant
-    btrfs_backup_hosts:
+    vim_hosts:
       hosts:
-        pi3:
-        pi4:
-        manjaro:
-    docker:
+        homebox:
+    zsh_hosts:
       hosts:
-        irix:
-    admin-ws:
-      hosts:
-        celsius:
-        onyx:
-        pi:
+        homebox:

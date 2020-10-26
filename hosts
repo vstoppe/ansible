@@ -35,8 +35,6 @@ all:
     adblocker:
       hosts:
         zero:
-        debian:
-        pi4:
     btrfs_backup_hosts:
       hosts:
         pi3:

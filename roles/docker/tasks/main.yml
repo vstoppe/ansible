@@ -29,7 +29,7 @@
   package:
     name: docker-compose
     state: present
-  when: ansible_architecturre == "aarch64"
+  when: ansible_architecture == "aarch64"
 
 - name: Ensure docker data directory
   file:

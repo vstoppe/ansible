@@ -22,6 +22,8 @@
     url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-{{ ansible_architecture }}
     dest: /usr/local/bin/docker-compose
     mode: 0755
+  when: ansible_architecture == "x86_64"
+  # (there is no binary for docker-compose on arm64)
 
 - name: Ensure docker data directory
   file:

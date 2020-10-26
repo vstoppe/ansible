@@ -1,7 +1,7 @@
 ---
 
 - name: ZSH setup for root
-  hosts: zsh_host
+  hosts: zsh_hosts
   become: true
 
   tasks:

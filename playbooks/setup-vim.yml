@@ -1,7 +1,7 @@
 ---
 
 - name: Setup vim for root user
-  hosts: vim_host
+  hosts: vim_hosts
   become: true
 
   tasks:

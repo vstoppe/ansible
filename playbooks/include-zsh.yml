@@ -1,0 +1,7 @@
+---
+
+- name: Confiugre zsh for zsh_users
+  hosts: zsh_hosts
+  become: true
+  roles:
+    - zsh

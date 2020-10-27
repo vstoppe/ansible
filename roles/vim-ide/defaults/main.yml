@@ -1,4 +1,6 @@
 ---
 # defaults file for vim-ide
 
+vim_packages_all: []
+vim_extra_package: []
 vim_package: neovim

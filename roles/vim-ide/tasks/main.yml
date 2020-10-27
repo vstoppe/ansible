@@ -1,15 +1,30 @@
 ---
 # tasks file for vim-ide
 
-- name: Include Vim-speciic variables
+#- name: declare vars
+#  vars:
+#    vim_packages_all: []
+
+- name: Include Vim-specific variables
   include_vars: "{{ vim_package }}.yml"
 
 - name: Include os family specific variables
   include_vars: "{{ ansible_os_family }}.yml"
 
+- name: All vim packages
+  set_fact:
+    vim_packages_all: "{{ vim_packages_all + [item] }}"
+  with_items:
+    - "{{vim_package}}"
+    - "{{vim_extra_package}}"
+    - git
+    - psutils
+    - python-pip
+    - socat
+
 - name: Ensure (neo)vim packages
   package:
-    name: ["{{ vim_package }}", "{{ vim_python_package }}", psutils, socat, python-pip, git]
+    name: "{{vim_packages_all}}"
     state: present
 
 - name: Ensure main dir for vim is set
@@ -26,4 +41,3 @@
     loop_var: vim_user
 
 - include_tasks: global_vim.yml
-  

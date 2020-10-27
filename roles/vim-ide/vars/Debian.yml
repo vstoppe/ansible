@@ -1,4 +1,5 @@
-
 ---
 
-vim_python_package: python-neovim
+vim_extra_package:
+  - python-neovim
+  - yarnpkg

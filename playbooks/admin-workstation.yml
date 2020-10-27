@@ -3,9 +3,9 @@
 - name: Docker setup
   hosts: admin-ws
   roles:
+    - role: btrfs
     - role: common
+    - role: docker
+    - role: desktop
     - role: vim-ide
     - role: zsh
-
-
-

@@ -22,6 +22,11 @@
     - privoxy-blocklist.timer
   notify: privoxy-blocklist_reload
 
+- name: enable privoxy-blocklist.timer
+  service:
+    name: privoxy-blocklist.timer
+    state: started
+    enabled: true
 
 - name: privoxy configuration
   template:

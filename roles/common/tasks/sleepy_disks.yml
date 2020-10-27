@@ -10,7 +10,7 @@
 
 - name: Remove hdparm.service file if no sleepy_disks defined
   file:
-    path:  /etc/systemd/system/hdparm.service
+    path: /etc/systemd/system/hdparm.service
     state: absent
   when: sleepy_disks is undefined
 

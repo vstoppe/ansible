@@ -1,0 +1,7 @@
+---
+
+- name: Apply VIM for $vim_users
+  hosts: vim_hosts
+  become: true
+  roles:
+    - vim-ide

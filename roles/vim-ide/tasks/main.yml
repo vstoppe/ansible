@@ -1,17 +1,13 @@
 ---
 # tasks file for vim-ide
 
-#- name: declare vars
-#  vars:
-#    vim_packages_all: []
-
 - name: Include Vim-specific variables
   include_vars: "{{ vim_package }}.yml"
 
 - name: Include os family specific variables
   include_vars: "{{ ansible_os_family }}.yml"
 
-- name: All vim packages
+- name: set_fact vim_all_packages
   set_fact:
     vim_packages_all: "{{ vim_packages_all + [item] }}"
   with_items:
@@ -20,12 +16,19 @@
     - git
     - psutils
     - python-pip
+    - python3-setuptools  # needed for pip
+    - python3-venv        # needed for pip
     - socat
 
-- name: Ensure (neo)vim packages
+- name: Apply all vim packages
   package:
     name: "{{vim_packages_all}}"
     state: present
+
+- name: Apply python3 neovim dependency
+  pip:
+    name: pynvim
+    executable: pip3
 
 - name: Ensure main dir for vim is set
   lineinfile:

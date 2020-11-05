@@ -9,9 +9,15 @@
   tasks:
     - name: Install packages
       package:
-        name: [cryptsetup, btrfs-progs, mbuffer]
+        name: [cryptsetup, btrfs-progs]
         state: present
-  # mbuffer ist needed for btrbks "--progress"
+    # mbuffer ist needed for btrbks "--progress"
+
+    - name: Install mbuffer package
+      package:
+        name: mbuffer
+      when: ansible_os_family != "ArchLinux"
+      # mbuffer only exists as AUR on ArchLinux
 
     - name: get btrbk
       get_url:

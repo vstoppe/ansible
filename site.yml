@@ -1,5 +1,4 @@
 ---
-- import_playbook: playbooks/adblocker.yml
 - import_playbook: playbooks/admin-workstation.yml
 - import_playbook: playbooks/apply-vim.yml
 - import_playbook: playbooks/apply-zsh.yml

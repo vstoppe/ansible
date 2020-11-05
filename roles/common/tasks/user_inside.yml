@@ -26,6 +26,7 @@
     - .config
     - .config/systemd
     - .config/systemd/user
+    - .config/systemd/user/default.target.wants
   loop_control:
     loop_var: dir
 
@@ -35,14 +36,25 @@
     dest: "{{ home.stdout }}/.config/systemd/user/ssh-agent.service"
     owner: "{{ user }}"
 
+- name: debug
+  debug:
+    msg: "{{ansible_facts['getent_passwd'][user][1]}}"
+
+
 - name: Enable ssh-agent for user
-  become: true
-  become_user: "{{ user }}"
-  environment:
-    XDG_RUNTIME_DIR: "/run/user/{{ ansible_facts['getent_passwd'][user][1] }}"
-  systemd:
-    name: ssh-agent
-    daemon_reload: true
-    enabled: true
-    scope: user
-    state: restarted
+  file:
+    dest: "{{ home.stdout }}/.config/systemd/user/default.target.wants/ssh-agent.service"
+    src: "{{ home.stdout }}/.config/systemd/user/ssh-agent.service"
+    state: link
+
+    #- name: Enable ssh-agent for user
+    #  become: true
+    #  become_user: "{{ user }}"
+    #  environment:
+    #    XDG_RUNTIME_DIR: "/run/user/{{ ansible_facts['getent_passwd'][user][1] }}"
+    #  systemd:
+    #    name: ssh-agent
+    #    daemon_reload: true
+    #    enabled: true
+    #    scope: user
+    #    state: restarted

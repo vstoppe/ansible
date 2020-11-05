@@ -1,12 +1,18 @@
 ---
 ### Debian specific tasks
 
-- name: Enable contrib non-free repos
-  copy:
-    src: debian10_extra_repos.list
-    dest: /etc/apt/sources.list.d/extra_repos.list
+- name: Enable Buter extra repsitories
+  apt_repository:
+    repo: "{{item}}"
+    state: present
+    update_cache: true
+  with_items:
+    - "deb http://deb.debian.org/debian buster contrib non-free"
+    - "deb http://deb.debian.org/debian buster-backports contrib non-free"
+    - "deb http://deb.debian.org/debian buster-updates contrib non-free"
+    - "deb http://deb.debian.org/debian-security/ buster/updates contrib non-free"
   when: ansible_architecture == "x86_64"
-
+  # These Packages are not available for RasperryPI OS
 
 - name: install virtualbox-iso-package
   package:

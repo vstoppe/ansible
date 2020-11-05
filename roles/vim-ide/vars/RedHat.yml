@@ -1,0 +1,8 @@
+---
+# RedHat variables:
+
+vim_extra_package:
+  - python3-pip
+  - python3-virtualenv # needed for pip
+  - python3-setuptools  # needed for pip
+  - python3-pip

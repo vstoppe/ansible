@@ -14,10 +14,6 @@
     - "{{vim_package}}"
     - "{{vim_extra_package}}"
     - git
-    - psutils
-    - python-pip
-    - python3-setuptools  # needed for pip
-    - python3-venv        # needed for pip
     - socat
 
 - name: Apply all vim packages

@@ -1,3 +1,10 @@
 ---
+# Arch Linux vars
 
-vim_extra_package: python-pynvim, yarn
+vim_extra_package:
+  - psutils
+  - python-pip
+  - python-pynvim
+  - python-virtualenv # needed for pip
+  - python-setuptools
+  - yarn

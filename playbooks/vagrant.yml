@@ -1,0 +1,8 @@
+---
+
+- name: Vagrant test playbook for changing new roles
+  hosts: vagrant
+  roles:
+    - role: common
+    - role: vim-ide
+    #- role: libvirt

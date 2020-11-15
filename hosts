@@ -14,6 +14,9 @@ all:
     irix:
       ansible_user: vst
       ansible_ssh_user: vst
+    localhost:
+      connection: local
+      ansible_ssh_user: vst
     macbook:
       ansible_host: 10.1.1.42
       ansible_user: vst
@@ -66,3 +69,6 @@ all:
     zsh_hosts:
       hosts:
         homebox:
+    windows_workstation:
+      hosts:
+        localhost:

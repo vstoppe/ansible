@@ -1,0 +1,7 @@
+---
+
+- name: Docker setup
+  hosts: localhost
+  roles:
+    - role: vim-ide
+    - role: zsh

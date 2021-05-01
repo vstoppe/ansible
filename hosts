@@ -12,8 +12,8 @@ all:
     homebox:
       ansible_user: root
     irix:
-      ansible_user: vst
-      ansible_ssh_user: vst
+      ansible_user: root
+      ansible_ssh_user: root
     macbook:
       ansible_host: 10.1.1.42
       ansible_user: vst
@@ -24,8 +24,8 @@ all:
       ansible_ssh_user: vst
     pi3:
       ansible_ssh_user: pi
-    pi4:
-      ansible_ssh_user: root
+    homepi:
+      ansible_ssh_user: vst
     zero:
       ansible_ssh_user: pi
       ansible_become: true
@@ -39,17 +39,15 @@ all:
     btrfs_backup_hosts:
       hosts:
         pi3:
-        pi4:
-        manjaro:
+        homepi:
     docker:
       hosts:
         irix:
-        homebox:
+        homepi:
     admin-ws:
       hosts:
         celsius:
         onyx:
-        pi:
     vagrant:
       hosts:
         centos:
@@ -62,7 +60,9 @@ all:
         ansible_user: vagrant
     vim_hosts:
       hosts:
-        homebox:
+        #homepi:
+        irix:
     zsh_hosts:
       hosts:
-        homebox:
+        homepi:
+        irix:

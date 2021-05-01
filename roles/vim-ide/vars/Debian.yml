@@ -3,8 +3,8 @@
 
 vim_extra_package:
   - psutils
-  - python-neovim
-  - python-pip
+  - python3-neovim
+  - python3-pip
   - python3-pip
   - python3-setuptools  # needed for pip
   - python3-venv        # needed for pip

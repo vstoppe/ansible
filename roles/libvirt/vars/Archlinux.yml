@@ -1,0 +1,9 @@
+---
+# Vars for Archlinux famliy
+
+libvirt_packages_os_specific:
+  - bridge-utils
+  - libvirt
+  - openbsd-netcat
+  - ovmf
+  - qemu-headless

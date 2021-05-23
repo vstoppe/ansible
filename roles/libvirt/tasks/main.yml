@@ -1,0 +1,31 @@
+---
+
+# tasks file for libvirt
+
+- include_vars: "{{ ansible_os_family }}.yml"
+
+
+- name: Install libvirt and support packages
+  package:
+    name: "{{ libvirt_packages }} + {{ libvirt_packages_os_specific }}"
+    state: latest
+
+- name: Ensure services up and running
+  systemd:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  with_items:
+    - libvirtd
+    - virtlogd
+    - libvirtd
+
+- name: Ensure libvirt is enabled as name source in nssswitc.conf
+  lineinfile:
+    path: /etc/nsswitch.conf
+    regexp: "^hosts:.*file"
+    line: "libvirt libvirt_guest"
+    state: present
+
+
+

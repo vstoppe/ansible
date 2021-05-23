@@ -1,0 +1,14 @@
+---
+# Vars for Debian family
+
+libvirt_packages_os_specific:
+  - bridge-utils
+  - libvirt-clients
+  - libvirt-daemon-system
+  - netcat-openbsd
+  - ovmf
+  - qemu
+  - qemu-kvm
+  - qemu-system-x86
+  - qemu-utils
+  - virtinst

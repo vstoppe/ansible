@@ -7,10 +7,10 @@
     state: present
     update_cache: true
   with_items:
-    - "deb http://deb.debian.org/debian buster contrib non-free"
-    - "deb http://deb.debian.org/debian buster-backports contrib non-free"
-    - "deb http://deb.debian.org/debian buster-updates contrib non-free"
-    - "deb http://deb.debian.org/debian-security/ buster/updates contrib non-free"
+    - "deb http://deb.debian.org/debian bullseye contrib non-free"
+    - "deb http://deb.debian.org/debian bullseye-backports contrib non-free"
+    - "deb http://deb.debian.org/debian bullseye-updates contrib non-free"
+    - "deb http://deb.debian.org/debian-security/ bullseye-security updates main contrib non-free"
   when: ansible_architecture == "x86_64"
   # These Packages are not available for RasperryPI OS
 

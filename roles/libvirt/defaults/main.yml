@@ -1,0 +1,8 @@
+---
+# defaults file for libvirt
+
+libvirt_packages:
+  - dmidecode
+  - dnsmasq
+  - ebtables
+  - ethtool

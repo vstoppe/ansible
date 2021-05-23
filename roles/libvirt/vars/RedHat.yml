@@ -1,0 +1,10 @@
+---
+# Vars for RedHat family
+
+libvirt_packages_os_specific:
+  - edk2-ovmf
+  - libvirt
+  - libvirt-nss
+  - qemu-kvm-common
+  - qemu-kvm-core
+  - socat

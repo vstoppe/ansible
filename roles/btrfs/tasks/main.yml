@@ -14,9 +14,9 @@
     warn: false
   register: btrfs_volumes
 
-- name: enable btrfs scrubbing for all btfs volumes
-  service:
-    name: btrfs-scrub@{{ item }}.timer
-    state: started
-    enabled: yes
-  with_items: "{{ btrfs_volumes.stdout_lines }}"
+  #- name: enable btrfs scrubbing for all btfs volumes
+  #  service:
+  #    name: btrfs-scrub@{{ item }}.timer
+  #    state: started
+  #    enabled: yes
+  #  with_items: "{{ btrfs_volumes.stdout_lines }}"

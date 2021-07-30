@@ -1,0 +1,35 @@
+---
+- hosts: localhost
+  connection: local
+  become: true
+  vars:
+    port_packages:
+      - docker
+      - docker-compose
+      - gnupg2
+      - helm-3.6
+      - neovim
+      - nmap
+      - py38-pip
+      - python38
+      - zsh
+      - virt-manager
+      - libvirt
+    pip_packages:
+      - ansible
+      - ansible-lint
+      - pynvim
+
+
+  tasks:
+  - name: Install macports packages
+    community.general.macports:
+      name: "{{ item }}"
+    with_items: "{{ port_packages }}"
+
+
+  - name: Install pip packages
+    pip:
+      name: "{{ item }}"
+    become: false
+    with_items: "{{ pip_packages }}"

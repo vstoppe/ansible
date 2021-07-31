@@ -4,17 +4,18 @@
   become: true
   vars:
     port_packages:
+      - bitwarden-cli
       - docker
       - docker-compose
       - gnupg2
       - helm-3.6
+      - libvirt
       - neovim
       - nmap
       - py38-pip
       - python38
-      - zsh
       - virt-manager
-      - libvirt
+      - zsh
     pip_packages:
       - ansible
       - ansible-lint

@@ -20,6 +20,7 @@
       - ansible
       - ansible-lint
       - pynvim
+      - bitwarden-simple-cli # needed for Ansble Bitwarden module
 
 
   tasks:

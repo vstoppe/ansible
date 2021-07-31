@@ -1,0 +1,8 @@
+---
+
+- name: Deploy Kubernetes cluster
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  roles:
+    - k8s_cert-manager

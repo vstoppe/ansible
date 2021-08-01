@@ -9,6 +9,7 @@
       - docker-compose
       - gnupg2
       - helm-3.6
+      - kind
       - libvirt
       - neovim
       - nmap
@@ -21,6 +22,7 @@
       - ansible-lint
       - pynvim
       - bitwarden-simple-cli # needed for Ansble Bitwarden module
+      - PyYaml # dependency for Ansible
 
 
   tasks:

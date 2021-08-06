@@ -4,5 +4,6 @@
 - import_playbook: playbooks/apply-zsh.yml
 - import_playbook: playbooks/btrfs-backup-srv.yml
 - import_playbook: playbooks/docker-srv.yml
+- import_playbook: playbooks/docker-workstation.yml
 - import_playbook: playbooks/vagrant.yml
 - import_playbook: playbooks/windows-workstation.yml

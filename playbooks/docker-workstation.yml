@@ -1,0 +1,11 @@
+---
+
+- name: Docker setup
+  hosts: docker-workstation
+  roles:
+    - role: btrfs
+    - role: common
+    - role: docker
+    - role: zsh
+    - role: vim-ide
+

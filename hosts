@@ -3,54 +3,28 @@ all:
   hosts:
     centos:
       ansible_port: 2225
-    celsius:
-        ansible_ssh_user: ansible
-        ansible_user: ansible
-        ansible_host: 10.1.1.37
     debian:
       ansible_port: 2223
-    homebox:
-      ansible_user: root
     irix:
       ansible_user: root
       ansible_ssh_user: root
-    localhost:
-      connection: local
-      ansible_ssh_user: vst
     macbook:
       ansible_host: 10.1.1.42
       ansible_user: vst
     manjaro:
       ansible_port: 2224
     onyx:
-      ansible_user: vst
-      ansible_ssh_user: vst
-    pi3:
-      ansible_ssh_user: pi
-    homepi:
-      ansible_ssh_user: vst
-    zero:
-      ansible_ssh_user: pi
-      ansible_become: true
+      ansible_user: root
   vars:
     ansible_become: true
     ansible_python_interpreter: /usr/bin/python3
   children:
-    adblocker:
-      hosts:
-        zero:
-    btrfs_backup_hosts:
-      hosts:
-        pi3:
-        homepi:
     docker:
       hosts:
         irix:
-        homepi:
-    admin-ws:
+    docker-workstation:
       hosts:
-        celsius:
-        onyx:
+        onyx
     vagrant:
       hosts:
         centos:
@@ -63,13 +37,7 @@ all:
         ansible_user: vagrant
     vim_hosts:
       hosts:
-        #homepi:
         irix:
     zsh_hosts:
       hosts:
-        homepi:
         irix:
-        homebox:
-    windows_workstation:
-      hosts:
-        localhost:

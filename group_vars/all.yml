@@ -1,15 +1,14 @@
 ---
 
-#users:
-  #  - username: vst
-  #  fullname: Volker Stoppe
-  #  groups: [wheel]
-  #  ssh_key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDN2tPFNEoG3zlZnoXX3LT1emznOLZnj45S8JEweB0HEBN0uNCvBPYZAAyLAbjSg/gJPHi1rlJlAvyLTfWaZstSiQk4WW2m3z0XWV+FEM85mEsKAhn6SJdrfizRaTAk2zNhrPU7OBqsMjvkw7v5PQYvei86RHTA+BpkngmiRP16/7xmJLYkl6azNfLYXDyr5RgIpkm1KE5pJJUOOyIZ84fcZrJWR4b6eDUS/AnlfwQE6k2oRyZNbmiPSSXWglOstKckNDIno1sT3WpTsXO1HWFrCZDgpQAdJd6aZ2dZtmtm3YcW/aDeuGDcTIumHB+MOwCA0qEoBHhjrW92asyr0k7X'
+users:
+  - username: vst
+    fullname: Volker Stoppe
+    groups: [wheel]
+    ssh_key: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDN2tPFNEoG3zlZnoXX3LT1emznOLZnj45S8JEweB0HEBN0uNCvBPYZAAyLAbjSg/gJPHi1rlJlAvyLTfWaZstSiQk4WW2m3z0XWV+FEM85mEsKAhn6SJdrfizRaTAk2zNhrPU7OBqsMjvkw7v5PQYvei86RHTA+BpkngmiRP16/7xmJLYkl6azNfLYXDyr5RgIpkm1KE5pJJUOOyIZ84fcZrJWR4b6eDUS/AnlfwQE6k2oRyZNbmiPSSXWglOstKckNDIno1sT3WpTsXO1HWFrCZDgpQAdJd6aZ2dZtmtm3YcW/aDeuGDcTIumHB+MOwCA0qEoBHhjrW92asyr0k7X'
 
+
+zsh_users:
+  - vst
+  - root
 
 #http_proxy: 10.1.1.5:8118
-
-
-#zsh_users:
-  #  - vst
-  #- root

@@ -1,6 +1,0 @@
----
-
-sleepy_disks:
-  disk1:
-    name: /dev/sda
-    value: 240

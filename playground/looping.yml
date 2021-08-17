@@ -1,0 +1,48 @@
+---
+
+- name: looping
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  become: false
+  tasks:
+
+
+  - name: vars of simple dict
+    set_fact:
+      simple_dict:
+        key_a: a
+        key_b: b
+        key_c: c
+
+  - name: loop simple dict
+    debug:
+      msg: "### KEY: {{ item.key }} ### VALUE: {{ item.value }}"
+    with_dict: "{{ simple_dict }}"
+  
+  
+  - name: set family with subelements structure
+    set_fact:
+      families:
+        - surename: Smith
+          children:
+            - name: Mike
+              age: 4
+            - name: Kate
+              age: 7
+        - surename: Sanders
+          children:
+            - name: Pete 
+              age: 12
+            - name: Sara
+              age: 17
+
+  - name: List children with_subelements
+    debug:
+      msg: "Family={{ item.0.surename }} Child={{ item.1.name }} Age={{ item.1. age }}"
+    with_subelements:
+      - "{{ families }}"
+      - children
+
+
+

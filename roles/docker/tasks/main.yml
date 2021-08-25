@@ -2,10 +2,8 @@
 # tasks file for docker
 
 - name: Include OS-specific variables
-  include_vars: "{{ item }}"
-  with_first_found:
-    - files:
-      - "vars/{{ ansible_os_family }}.yml"
+  #include_vars: "{{ item }}"
+  include_vars: "{{ ansible_os_family }}.yml"
 
   # Debian needs some extra steps:
 - include_tasks: debian.yml

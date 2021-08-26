@@ -10,32 +10,26 @@
   when: ansible_os_family == 'Debian'
 
 
-- name: Ensure Docker package
+- name: Ensure Docker package is installed
   package:
-    name: [ "{{ docker_package }}" ]
+    name: "{{ docker_package }}"
     state: present
 
-- name: Ensure docker-compose for x86_64"
-  get_url:
-    url: https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-{{ ansible_architecture }}
-    dest: /usr/local/bin/docker-compose
-    mode: 0755
-  when: ansible_architecture == "x86_64"
-  # (there is no binary for docker-compose on arm64)
 
-- name: Ensure docker-compose for aarch64
+- name: Ensure docker-compose is installed
   package:
     name: docker-compose
     state: present
-  when: ansible_architecture == "aarch64"
+
 
 - name: Ensure docker data directory
   file:
     path: "{{ item }}"
     state: directory
   with_items:
-    - /mnt/docker
-    - /mnt/workspace
+    - "{{ docker_environment.docker_data }}"
+    - "{{ docker_environment.docker_workspace }}"
+
 
 - name: Deploy all service files
   copy:
@@ -65,3 +59,19 @@
   with_items:
     - docker
     - docker-cleanup.timer
+
+
+- name: Deploy docker environment file
+  template:
+    src: docker_env.j2
+    dest: /etc/docker/docker.env
+    mode: 440
+
+
+# This file fill source the docker environment for bash
+- name: Deploy source file for docker.env
+  copy:
+    src: docker-env.sh
+    dest: /etc/profile.d/docker-env.sh
+    mode: 440
+

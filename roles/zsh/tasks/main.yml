@@ -35,3 +35,4 @@
   vars:
     user: "{{ item }}"
   with_items: "{{ zsh_users }}"
+  when: zsh_users is defined

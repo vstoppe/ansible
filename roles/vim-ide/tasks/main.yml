@@ -38,5 +38,6 @@
   with_items: "{{ vim_users }}"
   loop_control:
     loop_var: vim_user
+  when: vim_user is defined
 
 - include_tasks: global_vim.yml

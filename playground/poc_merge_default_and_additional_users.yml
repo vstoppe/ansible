@@ -1,0 +1,72 @@
+---
+
+- name: playground
+  hosts: localhost
+  vars:
+    default_users:
+      - name: user_a
+        sudo: true
+        shell: /bin/bash
+      - name: user_b
+        sudo: true
+        shell: /bin/bash
+      - name: user_c
+        sudo: true
+        shell: /bin/bash
+    additional_users:
+      - name: user_a
+        sudo: false
+      - name: user_b
+        shell: /bin/zsh
+      - name: user_d
+        sudo: false
+        shell: /bin/csh
+  tasks:
+
+
+  - name: items2dict deault_users
+    debug:
+      msg: "{{ default_users | items2dict(key_name='name', value_name='sudo')}}"
+
+
+  - name: Debug nested query
+    debug:
+      msg: "{{ item.0.name }} {{ item.1.name }}"
+    loop: "{{ query('nested', default_users, additional_users) }}"
+
+
+  - name: Generate merged_users when user exists in default_users and additional_users
+    set_fact:
+      merged_users: "{{ merged_users | default([]) + [{ 'name': item.0.name, 'sudo': item.1.sudo |default(item.0.sudo), 'shell': item.1.shell |default(item.0.shell) }] }}" 
+    when:
+      item.0.name == item.1.name
+    with_nested:
+      - "{{ default_users }}"
+      - "{{ additional_users }}"
+
+
+  - name: Add default_users who are not in additional_users to merged_users
+    set_fact:
+      merged_users: "{{ merged_users | default([]) + [{ 'name': item.0.name, 'sudo': item.0.sudo |default('false'), 'shell': item.0.shell | default('/bin/sh') }] }}"
+    when: >
+      additional_users | selectattr('name', 'equalto', item.0.name) | list | count == 0 and
+      merged_users     | selectattr('name', 'equalto', item.0.name) | list | count == 0
+    with_nested:
+      - "{{ default_users }}"
+      - "{{ additional_users }}"
+
+
+  - name: Add additional_users who are not in default_users to merged_users
+    set_fact:
+      merged_users: "{{ merged_users | default([]) + [{ 'name': item.1.name, 'sudo': item.1.sudo |default('false'), 'shell': item.1.shell | default('/bin/sh') }] }}"
+    when: >
+      default_users | selectattr('name', 'equalto', item.1.name) | list | count == 0 and
+      merged_users  | selectattr('name', 'equalto', item.1.name) | list | count == 0
+    with_nested:
+      - "{{ default_users }}"
+      - "{{ additional_users }}"
+
+
+  - name: Debug merged_users
+    debug:
+      msg: "{{ merged_users }}"

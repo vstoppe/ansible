@@ -11,8 +11,10 @@
       - helm-3.6
       - kind
       - libvirt
+      - macfuse
       - neovim
       - nmap
+      - nodejs14
       - py38-pip
       - python38
       - virt-manager

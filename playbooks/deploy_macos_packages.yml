@@ -15,17 +15,20 @@
       - neovim
       - nmap
       - nodejs14
-      - py38-pip
-      - python38
+      - py39-pip
+      - py39-xattr
+      - python39
       - virt-manager
+      - wget
       - zsh
     pip_packages:
       - ansible
       - ansible-lint
       - pynvim
-      - bitwarden-simple-cli # needed for Ansble Bitwarden module
+      #- bitwarden-simple-cli # needed for Ansble Bitwarden module
       - PyYaml # dependency for Ansible
 
+# py39-xattr: for opencore / munki installer
 
   tasks:
   - name: Install macports packages

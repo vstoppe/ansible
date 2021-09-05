@@ -19,6 +19,7 @@
       - py39-xattr
       - python39
       - virt-manager
+      - watch
       - wget
       - zsh
     pip_packages:

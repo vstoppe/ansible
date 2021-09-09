@@ -18,6 +18,7 @@
       - py39-pip
       - py39-xattr
       - python39
+      - rsync
       - virt-manager
       - watch
       - wget

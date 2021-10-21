@@ -35,9 +35,3 @@ all:
         ansible_host: 127.0.0.1
         ansible_ssh_private_key_file: ~/.ssh/vagrant.key
         ansible_user: vagrant
-    vim_hosts:
-      hosts:
-        irix:
-    zsh_hosts:
-      hosts:
-        irix:

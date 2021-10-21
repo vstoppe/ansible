@@ -1,4 +1,7 @@
 ---
+
+# sudo port select --set helm helm3.7
+#
 - hosts: localhost
   connection: local
   become: true
@@ -8,7 +11,7 @@
       - docker
       - docker-compose
       - gnupg2
-      - helm-3.6
+      - helm-3.7
       - kind
       - libvirt
       - macfuse

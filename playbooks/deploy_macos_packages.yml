@@ -29,6 +29,7 @@
     pip_packages:
       - ansible
       - ansible-lint
+      - openshift
       - pynvim
       #- bitwarden-simple-cli # needed for Ansble Bitwarden module
       - PyYaml # dependency for Ansible

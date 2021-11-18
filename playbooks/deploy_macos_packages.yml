@@ -7,6 +7,7 @@
   become: true
   vars:
     port_packages:
+      - p7zip
       - bitwarden-cli
       - docker
       - docker-compose

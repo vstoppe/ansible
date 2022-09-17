@@ -1,14 +1,11 @@
 ---
 
-# sudo port select --set helm helm3.7
-#
 - hosts: localhost
   connection: local
   become: true
   vars:
     port_packages:
       - p7zip
-      - bitwarden-cli
       - docker
       - docker-compose
       - gnupg2
@@ -20,9 +17,9 @@
       - nmap
       - nodejs14
       - py39-pip
-      - py39-xattr
       - python39
       - rsync
+      - tmux
       - virt-manager
       - watch
       - wget
@@ -32,10 +29,7 @@
       - ansible-lint
       - openshift
       - pynvim
-      #- bitwarden-simple-cli # needed for Ansble Bitwarden module
       - PyYaml # dependency for Ansible
-
-# py39-xattr: for opencore / munki installer
 
   tasks:
   - name: Install macports packages

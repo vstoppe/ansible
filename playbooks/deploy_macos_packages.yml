@@ -16,6 +16,7 @@
       - neovim
       - nmap
       - nodejs14
+      - pam-reattach
       - py39-pip
       - python39
       - rsync
@@ -30,6 +31,8 @@
       - openshift
       - pynvim
       - PyYaml # dependency for Ansible
+
+# pam-reattach: enables touch-id in tmux sessions
 
   tasks:
   - name: Install macports packages

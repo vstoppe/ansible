@@ -5,7 +5,7 @@
   become: true
   vars:
     port_packages:
-      - p7zip
+      - cargo
       - docker
       - docker-compose
       - gnupg2
@@ -16,6 +16,7 @@
       - neovim
       - nmap
       - nodejs14
+      - p7zip
       - pam-reattach
       - py39-pip
       - python39
@@ -33,6 +34,7 @@
       - PyYaml # dependency for Ansible
 
 # pam-reattach: enables touch-id in tmux sessions
+# cargo: rust package manager. needed for LunarVim
 
   tasks:
   - name: Install macports packages

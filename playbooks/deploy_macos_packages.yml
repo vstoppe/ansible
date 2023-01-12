@@ -10,7 +10,9 @@
       - docker-compose
       - gnupg2
       - helm-3.7
+      - k9s
       - kind
+      - krew
       - kubectx
       - libvirt
       - macfuse
